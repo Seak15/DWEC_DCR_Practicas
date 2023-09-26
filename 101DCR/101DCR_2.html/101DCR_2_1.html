@@ -1,0 +1,24 @@
+<!--ENUNCIADO:
+    1.	Define una variable saludo=”Hola” como variable local dentro de una función saludar() 
+    que muestre una ventana emergente con el valor de la variable saludo.
+•	Invoca la función
+•	Muestra la variable desde fuera de la función mediante un window.alert-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 Parte 1</title>
+    <script>
+        //FUNCION SALUDAR
+        function saludar(){
+            var saludo = "Hola";
+            alert(saludo);
+        }
+        saludar();//Invocando a la funcion
+        window.alert(saludo); //Genera un error ya que la variable está definida dentro de la funcion
+    </script>
+</head>
+<body>
+</body>
+</html>
