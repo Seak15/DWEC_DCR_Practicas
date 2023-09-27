@@ -11,28 +11,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
+        /*2.- Crea la lista de contactos en un array, de tal manera que cada uno de 
+        sus elementos será un objeto que describa a un solo usuario (tres propiedades). */
         //RAMA2
         //nombres
-        nom1 = "Maxwell Wright";
-        nom2 = "Raja Villarreal";
-        nom3 = "Helen Richards";
-        //telefonos
-        tel1 = "(0191)719 6495";
-        tel2 = "0866 398 2895";
-        tel3 = "0800 1111";
-        //correos
-        corr1 = "curabitur.egestas.nunc@nonummyac.co.uk";
-        corr2 = "posuere.vulputate@sed.com";
-        corr3 = "libero@convallis.edu";
+        var lista = [
+             persona1 ={nombre: "Maxwell Wright",
+                    telefono: "(0191)719 6495",
+                    correo: "curabitur.egestas.nunc@nonummyac.co.uk"},
 
-        //Mostramos por pantalla
-        console.log(nom1 + " / " + tel1 + " / " + corr1);
-        //console.log(nom2 + " / " + tel2 + " / " + corr2);
-        console.log(nom3 + " / " + tel3 + " / " + corr3);
+             persona2 ={nombre: "Raja Villarreal",
+                    telefono: "0866 398 2895",
+                    correo: "posuere.vulputate@sed.com"},
 
-        suma = tel2 + 7;
-        console.log(typeof(tel2));
-        console.log(suma);
+             persona3 ={nombre: "Helen Richards",
+                    telefono: "0800 1111",
+                    correo: "libero@convallis.edu"}
+        ]
+
+        lista.push(persona4 ={nombre: "Maisie Haley ",
+                            telefono: "0913 531 3030 ",
+                            correo: "risus.Quisque@urna.ca"})
+
         
     </script>
 </head>
