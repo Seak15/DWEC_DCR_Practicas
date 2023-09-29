@@ -1,11 +1,16 @@
-<!--Elabora una lista de contactos
-    Inicialmente tendrá los calores de la tabla adjunta:
-    Declara e inicializa las variables donde se almacerará toda la informacion
-    (nueve variables en total).
-    Muestra en la consola informacion sobre el primer y el ultimo contacto en 
-    el formulario: nombre/ telefono/ correo.-->
+<!--
+2.- Crea la lista de contactos en un array, de tal manera que cada uno de sus 
+elementos será un objeto que describa a un solo usuario (tres propiedades). 
+
+Al final de la lista declarada de esta manera, agrega un nuevo contacto usando 
+un método de array, apropiado. El nuevo contacto es: 
+Maisie Haley / 0913 531 3030 / risus.Quisque@urna.ca.
+
+Muestra el primer y último contacto, de nuevo en el formato: 
+nombre / teléfono / correo electrónico. (length)-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,26 +21,40 @@
         //RAMA2
         //nombres
         var lista = [
-             persona1 ={nombre: "Maxwell Wright",
-                    telefono: "(0191)719 6495",
-                    correo: "curabitur.egestas.nunc@nonummyac.co.uk"},
+            persona1 = {
+                nombre: "Maxwell Wright",
+                telefono: "(0191)719 6495",
+                correo: "curabitur.egestas.nunc@nonummyac.co.uk"
+            },
 
-             persona2 ={nombre: "Raja Villarreal",
-                    telefono: "0866 398 2895",
-                    correo: "posuere.vulputate@sed.com"},
+            persona2 = {
+                nombre: "Raja Villarreal",
+                telefono: "0866 398 2895",
+                correo: "posuere.vulputate@sed.com"
+            },
 
-             persona3 ={nombre: "Helen Richards",
-                    telefono: "0800 1111",
-                    correo: "libero@convallis.edu"}
+            persona3 = {
+                nombre: "Helen Richards",
+                telefono: "0800 1111",
+                correo: "libero@convallis.edu"
+            }
         ]
 
-        lista.push(persona4 ={nombre: "Maisie Haley ",
-                            telefono: "0913 531 3030 ",
-                            correo: "risus.Quisque@urna.ca"})
+        lista.push(persona4 = {
+            nombre: "Maisie Haley ",
+            telefono: "0913 531 3030 ",
+            correo: "risus.Quisque@urna.ca"
+        });
 
+        //Mostrando el primer y ultimo 
+        console.log("Primer contacto: " + lista[0].nombre  + " / " +  lista[0].telefono + " / "   +lista[0].correo);
+        console.log("Primer contacto: " + lista[lista.length - 1].nombre  + " / " +  lista[lista.length - 1].telefono 
+        + " / "   +lista[lista.length - 1].correo);
         
     </script>
 </head>
+
 <body>
 </body>
+
 </html>
