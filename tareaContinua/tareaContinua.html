@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        /*4.- Modifica el programa para que el usuario pueda elegir lo que quiere hacer con la lista. Las opciones serán:
-        •	Mostrar el primer contacto (primero)
-        •	Mostrar el último contacto (último)
-        •	Añadir un nuevo contacto (nuevo)
-        Al agregar un nuevo contacto, verifica si el usuario ha ingresado todos los datos necesarios. Si falta al menos 
-        uno de los tres valores (nombre, teléfono o correo electrónico), no se agrega el contacto.*/
+        /*5.- Encierra todo el programa en un bucle para que al usuario se le pregunte repetidamente qué quiere hacer. 
+        El usuario puede optar por:
+            •	Mostrar el primer contacto (primero)
+            •	Mostrar el último contacto (último)
+            •	Mostrar todos los contactos (todos)
+            •	Añadir un nuevo contacto (nuevo)
+            •	Salir del programa (salir)
+            Después de ejecutar la acción seleccionada, el programa le dará la oportunidad de elegir nuevamente. El programa 
+            debe finalizar las acciones solo después de que el usuario dé un comando específico (salir).*/
         //RAMA5
         //nombres
         var lista = [
@@ -40,41 +43,62 @@
             correo: "risus.Quisque@urna.ca"
         });
 
-        lista.push(persona5 = { //Modificacion del apartado 3
+        //
+        /*lista.push(persona5 = { //Modificacion del apartado 3
             nombre: prompt("Dime el nombre:"),
             telefono: prompt("Dime el telefono"),
             correo: prompt("Dime el correo: ")
-        });
+        });*/
 
+        //FUNCION MENU
         function menu() {
-            let opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto. \n-3 Añadir nuevo contacto.");
+            let opcion;
 
-            if (opcion == 3) {
-                    let nom = prompt("Dime el nombre:")
-                    let tel = prompt("Dime el nombre:")
-                    let cor = prompt("Dime el nombre:")
-                lista.push(persona = { //Modificacion del apartado 3
-                    nombre: nom,
-                    telefono: tel,
-                    correo: cor
-                });
-                while (nom == "" || tel == "" || cor == ""){
-                    alert("Introduce todos los valores")
-                    lista.pop();//Eliminando el elemento mal insertado para que no se guarde
-                    nom = prompt("Dime el nombre:")
-                    tel = prompt("Dime el nombre:")
-                    cor = prompt("Dime el nombre:")//Pedimos de nuevo los datos
+            while (true) {
+                opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto.\n-3 Mostrar todos los contactos \n-4 Añadir nuevo contacto. \n-5 Salir del programa");
 
-                    lista.push(persona = { //Añadiendo el elemento bien ingresado
-                    nombre: nom,
-                    telefono: tel,
-                    correo: cor
-                });
+                if (opcion === null || opcion === "") {
+                    alert("Opción no válida. Por favor, ingresa una opción válida.");
+                    continue;
+                }
+
+                opcion = parseInt(opcion);
+
+                switch (opcion) {
+                    case 1:
+                        // Lógica para mostrar el primer contacto
+                        break;
+                    case 2:
+                        // Lógica para mostrar el último contacto
+                        break;
+                    case 3:
+                        // Lógica para mostrar todos los contactos
+                        for (let contacto of lista) {
+                            console.log(contacto);
+                        }
+                        break;
+                    case 4:
+                        let nom = prompt("Dime el nombre:");
+                        let tel = prompt("Dime el teléfono:");
+                        let cor = prompt("Dime el correo:");
+
+                        if (nom !== "" && tel !== "" && cor !== "") {
+                            lista.push({
+                                nombre: nom,
+                                telefono: tel,
+                                correo: cor
+                            });
+                        } else {
+                            alert("Introduce todos los valores");
+                        }
+                        break;
+                    case 5:
+                        alert("FIN DEL PROGRAMA");
+                        return;
+                    default:
+                        alert("Opción no válida. Por favor, ingresa una opción válida.");
                 }
             }
-            /*while (opcion != 1 && opcion != 2 && opcion != 3){
-                opcion = prompt("Elige una opción válida \n-1\n-2\n-3");
-            }*/
         }
         menu();
         //Mostrando el array
