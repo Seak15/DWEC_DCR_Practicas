@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +9,9 @@
         /*4.- Modifica el programa para que el usuario pueda elegir lo que quiere hacer con la lista. Las opciones serán:
         •	Mostrar el primer contacto (primero)
         •	Mostrar el último contacto (último)
-        •	Añadir un nuevo contacto (nuevo)*/
+        •	Añadir un nuevo contacto (nuevo)
+        Al agregar un nuevo contacto, verifica si el usuario ha ingresado todos los datos necesarios. Si falta al menos 
+        uno de los tres valores (nombre, teléfono o correo electrónico), no se agrega el contacto.*/
         //RAMA4
         //nombres
         var lista = [
@@ -42,14 +43,48 @@
         lista.push(persona5 = { //Modificacion del apartado 3
             nombre: prompt("Dime el nombre:"),
             telefono: prompt("Dime el telefono"),
-            correo: prompt ("Dime el correo: ")
+            correo: prompt("Dime el correo: ")
         });
 
+        function menu() {
+            let opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto. \n-3 Añadir nuevo contacto.");
+
+            if (opcion == 3) {
+                    let nom = prompt("Dime el nombre:")
+                    let tel = prompt("Dime el nombre:")
+                    let cor = prompt("Dime el nombre:")
+                lista.push(persona = { //Modificacion del apartado 3
+                    nombre: nom,
+                    telefono: tel,
+                    correo: cor
+                });
+                while (nom == "" || tel == "" || cor == ""){
+                    alert("Introduce todos los valores")
+                    lista.pop();//Eliminando el elemento mal insertado para que no se guarde
+                    nom = prompt("Dime el nombre:")
+                    tel = prompt("Dime el nombre:")
+                    cor = prompt("Dime el nombre:")//Pedimos de nuevo los datos
+
+                    lista.push(persona = { //Añadiendo el elemento bien ingresado
+                    nombre: nom,
+                    telefono: tel,
+                    correo: cor
+                });
+                }
+            }
+            /*while (opcion != 1 && opcion != 2 && opcion != 3){
+                opcion = prompt("Elige una opción válida \n-1\n-2\n-3");
+            }*/
+        }
+        menu();
+        //Mostrando el array
+        console.log(lista);
+
         //Mostrando el primer y ultimo 
-        console.log("Primer contacto: " + lista[0].nombre  + " / " +  lista[0].telefono + " / "   +lista[0].correo);
-        console.log("Primer contacto: " + lista[lista.length - 1].nombre  + " / " +  lista[lista.length - 1].telefono 
-        + " / "   +lista[lista.length - 1].correo);
-        
+        console.log("Primer contacto: " + lista[0].nombre + " / " + lista[0].telefono + " / " + lista[0].correo);
+        console.log("Último contacto: " + lista[lista.length - 1].nombre + " / " + lista[lista.length - 1].telefono
+            + " / " + lista[lista.length - 1].correo);
+
     </script>
 </head>
 
