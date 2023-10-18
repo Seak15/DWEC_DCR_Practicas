@@ -53,8 +53,9 @@
         //FUNCION MENU
         function menu() {
             let opcion;
+            let continuar = true;
 
-            while (true) {
+            while (continuar == true) {
                 opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto.\n-3 Mostrar todos los contactos \n-4 Añadir nuevo contacto. \n-5 Salir del programa");
 
                 if (opcion === null || opcion === "") {
@@ -65,19 +66,21 @@
                 opcion = parseInt(opcion);
 
                 switch (opcion) {
-                    case 1:
-                        // Lógica para mostrar el primer contacto
+                    case 1://MOSTRAR PRIMER CONTACTO
+                        console.log("PRIMER CONTACTO:")
+                        console.log(lista[0]);
                         break;
-                    case 2:
-                        // Lógica para mostrar el último contacto
+                    case 2://MOSTRAR ULTIMO CONTACTO
+                        console.log("ÚLTIMO CONTACTO:")
+                        console.log (lista[lista.length-1])
                         break;
-                    case 3:
-                        // Lógica para mostrar todos los contactos
+                    case 3://MOSTRAR TODOS LOS CONTACTOS
                         for (let contacto of lista) {
+                            console.log("TODOS LOS CONTACTOS:")
                             console.log(contacto);
                         }
                         break;
-                    case 4:
+                    case 4: //AÑADIR UN CONTACTO NUEVO
                         let nom = prompt("Dime el nombre:");
                         let tel = prompt("Dime el teléfono:");
                         let cor = prompt("Dime el correo:");
@@ -94,7 +97,8 @@
                         break;
                     case 5:
                         alert("FIN DEL PROGRAMA");
-                        return;
+                        continuar = false
+                        break;
                     default:
                         alert("Opción no válida. Por favor, ingresa una opción válida.");
                 }
