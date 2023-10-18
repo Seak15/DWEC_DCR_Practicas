@@ -16,9 +16,10 @@ nombre / teléfono / correo electrónico. (length)-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        /*2.- Crea la lista de contactos en un array, de tal manera que cada uno de 
-        sus elementos será un objeto que describa a un solo usuario (tres propiedades). */
-        //RAMA2
+        /*3.- Modifica el programa para agregar, al final de la lista, el contacto que el usuario 
+        introducirá durante la ejecución del programa. (prompt). Al final, muestra el primer y 
+        último contacto de la lista. */
+        //RAMA3
         //nombres
         var lista = [
             persona1 = {
@@ -40,10 +41,16 @@ nombre / teléfono / correo electrónico. (length)-->
             }
         ]
 
-        lista.push(persona4 = {
+        lista.push(persona4 = {//Modificacion del apartado 2
             nombre: "Maisie Haley ",
             telefono: "0913 531 3030 ",
             correo: "risus.Quisque@urna.ca"
+        });
+
+        lista.push(persona5 = { //Modificacion del apartado 3
+            nombre: prompt("Dime el nombre:"),
+            telefono: prompt("Dime el telefono"),
+            correo: prompt ("Dime el correo: ")
         });
 
         //Mostrando el primer y ultimo 
