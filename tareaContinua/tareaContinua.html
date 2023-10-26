@@ -54,10 +54,8 @@
         function menu() {
             let opcion;
             let continuar = true;
-
             while (continuar == true) {
                 opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto.\n-3 Mostrar todos los contactos \n-4 Añadir nuevo contacto. \n-5 Salir del programa");
-
                 if (opcion === null || opcion === "") {
                     alert("Opción no válida. Por favor, ingresa una opción válida.");
                     continue;
@@ -67,16 +65,16 @@
 
                 switch (opcion) {
                     case 1://MOSTRAR PRIMER CONTACTO
-                        console.log("PRIMER CONTACTO:")
+                        console.log("PRIMER CONTACTO:");
                         console.log(lista[0]);
                         break;
                     case 2://MOSTRAR ULTIMO CONTACTO
-                        console.log("ÚLTIMO CONTACTO:")
-                        console.log (lista[lista.length-1])
+                        console.log("ÚLTIMO CONTACTO:");
+                        console.log (lista[lista.length-1]);
                         break;
                     case 3://MOSTRAR TODOS LOS CONTACTOS
+                    console.log("TODOS LOS CONTACTOS:");
                         for (let contacto of lista) {
-                            console.log("TODOS LOS CONTACTOS:")
                             console.log(contacto);
                         }
                         break;
