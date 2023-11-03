@@ -76,12 +76,48 @@
             }
         }
 
+        function menuOrdenar(array){
+            let continuar = true;
+            while (continuar == true) {
+                opcion = prompt("Elige una opción\n-1 Ordenar por nombre.\n-2 Ordenar por teléfono.\n-3 Ordenar por correo.");
+                if (opcion === null || opcion === "") {
+                    alert("Opción no válida. Por favor, ingresa una opción válida.");
+                    continue;
+                }
+
+                opcion = parseInt(opcion);
+
+                switch (opcion) {
+                    case 1://ORDENAR POR NOMBRE
+                        array.sort(function(a, b){return a.nombre - b.nombre});
+                        console.log("ARRAY ORDENADO POR NOMBRE:");
+                        console.log(array);
+                        continuar = false;
+                        break;
+                    case 2://ORDENAR POR TELEFONO
+                        array.sort(function(a, b){return a.telefono - b.telefono});
+                        console.log("ARRAY ORDENADO POR TELEFONO:");
+                        console.log(array);
+                        continuar = false;
+                        break;
+                    case 3://ORDENAR POR CORREO
+                        array.sort(function(a, b){return a.correo - b.correo});
+                        console.log("ARRAY ORDENADO POR CORREO:");
+                        console.log(array);
+                        continuar = false;  
+                        break;
+                    default:
+                        alert("Opción no válida. Por favor, ingresa una opción válida.");
+                }
+            }
+        }
+
         //FUNCION MENU
         function menu() {
             let opcion;
             let continuar = true;
             while (continuar == true) {
-                opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto.\n-3 Mostrar todos los contactos \n-4 Añadir nuevo contacto. \n-5 Salir del programa");
+                opcion = prompt("Elige una opción\n-1 Mostrar el primer contacto.\n-2 Mostrar el último contacto.\n-3 Mostrar todos los contactos \n-4 Añadir nuevo contacto. \n-5 Ordenar personas \n-6 Salir del programa");
                 if (opcion === null || opcion === "") {
                     alert("Opción no válida. Por favor, ingresa una opción válida.");
                     continue;
@@ -105,6 +141,9 @@
                         addNewContact(lista, prompt("Dime el nombre"), prompt("Dime el telefono"), prompt("Dime el correo"));
                         break;
                     case 5:
+                        menuOrdenar(lista);
+                        break;
+                    case 6://OPCION DE ORDENAR
                         alert("FIN DEL PROGRAMA");
                         continuar = false;
                         break;
