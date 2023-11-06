@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            Solicitar una frase desde teclado, almacenar cada palabra en un elemento de un array y mostrar los siguientes datos: 
+            //Probar con párrafos con , . () …
+            •	La primera palabra de la frase.
+            •	La última palabra de la frase.
+            •	El número de palabras de la frase.
+        */
+
+        let frase = prompt("Introduce una frase");
+        let array = [];
+        let elemento = "";
+
+        for (let i = 0; i < frase.length; i++) {
+            if (frase[i] === " ") {
+                if (elemento !== "") { // Verificar que la palabra no sea una cadena vacía
+                    array.push(elemento);
+                    elemento = "";
+                }
+            } else {
+                elemento += frase[i];
+            }
+        }
+        if (elemento !== "") { // Comprobar si la última palabra no es una cadena vacía
+            array.push(elemento);
+        }
+        console.log(array);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*A partir de un numero introducido por teclado, dibujar con asteriscos un rombo con esa cantidad de filas*/
+        let caja = document.getElementById("caja")
+        let numero = Number(prompt("Introduce el número de filas"));
+
+        // Dibuja la parte superior del rombo
+        for (let i = 1; i <= numero; i++) {
+            let espacios = "";
+            let asteriscos = "";
+            for (let j = 1; j <= numero - i; j++) {
+                espacios += "&nbsp&nbsp";
+            }
+            for (let k = 1; k <= 2 * i - 1; k++) {
+                asteriscos += "*";
+            }
+            caja.innerHTML += espacios + asteriscos + "<br>";
+        }
+
+        // Dibuja la parte inferior del rombo
+        for (let i = numero - 1; i >= 1; i--) {
+            let espacios = "";
+            let asteriscos = "";
+            for (let j = 1; j <= numero - i; j++) {
+                espacios += "&nbsp&nbsp";
+            }
+            for (let k = 1; k <= 2 * i - 1; k++) {
+                asteriscos += "*";
+            }
+            caja.innerHTML += espacios + asteriscos + "<br>";
+        }
+    </script>
+</body>
+</html>

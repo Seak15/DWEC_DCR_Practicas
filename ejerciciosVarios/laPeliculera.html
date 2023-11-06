@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: lightblue;">
+    <h2><b>DATOS DE USUARIO:</b></h2>
+    <p id="nombre"></p>
+    <p id = "pelicula"></p>
+    <p id = "lista"></p>
+    <p id = "precio"></p>
+    <script>
+        /*1. Pide el nombre del cliente. Si el nombre no es un tipo String o es nulo, 
+        debe producir un mensaje de error e insistir.*/
+        let nomCliente = prompt ("Introduce tu nombre")
+        while (!isNaN(nomCliente) || nomCliente == null) {
+            nomCliente = prompt("El nombre no es válido, introduzca de nuevo")
+        }
+        alert ("NOMBRE CORRECTO");
+
+        /*2. Pide la edad del cliente. Si la edad no es dato numérico o es nulo, 
+        debe producir un mensaje de error e insistir.*/
+        let edad = parseInt(prompt ("Ahora introduce tu edad"));
+        while (isNaN(edad) || edad == ""){
+            edad = parseInt(prompt("Edad incorrecta, introduzca de nuevo"));
+        }
+        alert("EDAD CORRECTA");
+
+        /* 3. Pide escoger el nombre de la película que está en cartelera de un listado 
+        que aparece en pantalla ('Spider Man', 'Superman', 'Dragon Ball Super', 
+        'La era del hielo', '18videos').
+        Si el cliente escoge una película que no está en la cartelera o es nulo, debe 
+        producir un mensaje de error e insistir.
+        */
+       let peliculas = Array ("Spiderman", "Superman","Dragon Ball Super","La era de Hielo", "18Videos");
+       let lista = "";
+       let comp = false;
+
+       for(i = 0; i < peliculas.length ; i ++){
+            lista += " - " + peliculas[i] + "\n";
+       }
+       let peliElegida = prompt(`Elige entre las peliculas \n ${lista}`);
+
+       while (peliElegida == null){
+        peliElegida = prompt("Introduce el nombre de una pelicula");
+       }
+
+       while (comp == false){
+            for(i = 0; i < peliculas.length ; i ++){
+                if (peliElegida == peliculas[i]){
+                    comp = true;
+                }
+            }
+            if (comp == false){
+                peliElegida = prompt(`La pelicula no está en la cartelera, introduce otra ${lista}`);
+            }
+       }
+
+       alert ("PELICULA CORRECTA")
+    
+    /*4. Si la edad del cliente es menor o igual a 17 y la película que escogió es 
+    "18videos", deberá mostrarle un mensaje de que no tiene permiso para ver esa 
+    película e insistir. Caso contrario, se realizará lo siguiente:*/
+
+    if (edad < 18 && peliElegida == "18Videos"){
+        while (peliElegida == "18Videos"){
+            peliElegida = prompt (`La película elegida es +18, elija otra \n ${lista}`)
+            if (!peliculas.includes(peliElegida)){
+                peliElegida = prompt (`La película elegida no esta en la cartelera, elija otra \n ${lista}`)
+            }
+        }
+        
+    }
+
+    /*5. Si la edad del cliente es menor o igual a 17, tendrá un descuento del 50% 
+    y además tendrá de regalo incluido con la entrada: Caramelos y Refresco.
+    6. Si la edad del cliente es mayor o igual a 18 y menor o igual a 25, no tendrá 
+    descuento alguno pero si tendrá de regalo incluido con la entrada: 
+    Palomitas, perrito y refresco.
+    7. Si la edad del cliente es mayor o igual a 26 y menor o igual a 35, tendrá 
+    un descuento del 10% y además tendrá de regalo incluido con la entrada: Perrito y refresco.
+*/
+    let comidas = Array ("Caramelos", "Palomitas", "Perrito");
+    let bebidas = Array ("Agua", "Refresco");
+    let descuento = 1;
+    let regalos = Array();
+    const precio = 8.5;
+
+    if (edad <= 17) {
+    regalos = [comidas[0], bebidas[1]];
+    descuento = 0.5;
+    } else if (edad > 17 && edad <= 25) {
+    regalos = [comidas[2], comidas[1], bebidas[1]];
+    descuento = 0.75;
+    } else if (edad > 25 && edad <= 35) {
+    regalos = [comidas[2], bebidas[1]];
+    descuento = 0.9;
+    } else {
+    regalos = [bebidas[0]];
+    descuento = 0.8;
+    }
+
+    listaRegalos = ""
+    for (i = 0; i < regalos.length; i++){
+        listaRegalos+= regalos[i]+ "\n"
+    }
+
+    document.getElementById("nombre").innerHTML = "<b> NOMBRE: </b>" + nomCliente;
+    document.getElementById("pelicula").innerHTML = "<b>PELICULA:</b> " + peliElegida;
+    document.getElementById("lista").innerHTML = "<b>REGALOS: </b>" + regalos;
+    document.getElementById("precio").innerHTML = "<b> PRECIO: </b>" + (precio * descuento).toFixed(2);
+
+
+    </script>
+</body>
+</html>

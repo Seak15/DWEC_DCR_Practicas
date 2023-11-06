@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+
+<body>
+    <script>
+        /*
+            Realiza una aplicación web que solicite una cadena de texto. El programa debe decir cuántas veces ocurre 
+            cada uno de estos patrones sin distinguir mayúsculas y minúsculas: “00” “101”, “ABC”, “H0”.Un carácter puede 
+            formar parte de más de un patrón encontrado. Por ejemplo:
+            En la cadena “000” el patrón “00” aparece dos veces (una empieza en la posición 0 y otra empieza en la posición 1).
+            Internamente el programa realizará la cuenta de patrones con una función definida como function numeroPatrones(texto) 
+            que devolverá un número entero con el número de patrones encontrados. 
+            Ejemplo:
+            1110101000ABCHO	
+        */
+        let cadena = prompt("Introduce una cadena:");
+
+        // Función para contar el número de veces que aparece un patrón en la cadena
+        function contarPatrones(texto, patron) {
+            let count = 0;
+            let pos = 0;
+            while (pos !== -1) { //IndexOf devuelve -1 si no se ha encontrado coincidencia
+                pos = texto.toLowerCase().indexOf(patron, pos);
+                if (pos !== -1) {
+                    count++;
+                    pos += 1; // Avanzamos la posición en 1 para buscar el siguiente patrón
+                }
+            }
+            return count;
+        }
+
+        // Contamos los patrones
+        console.log(`El patrón "00" aparece ${contarPatrones(cadena, "00")} veces.`);
+        console.log(`El patrón "101" aparece ${contarPatrones(cadena, "101")} veces.`);
+        console.log(`El patrón "ABC" aparece ${contarPatrones(cadena, "abc")} veces.`);
+        console.log(`El patrón "H0" aparece ${contarPatrones(cadena, "h0")} veces.`);
+
+
+
+    </script>
+</body>
+
+</html>

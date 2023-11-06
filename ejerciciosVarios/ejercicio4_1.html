@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Ejercicio  4.1 (6/10/23)
+        Crear un programa que permita introducir 10 nombres de los socios de un club (utilizar la estructura de array). 
+        Los elementos deben leerse de pantalla utilizando el método prompt(). En el mensaje de salida que permite la 
+        introducción de los nombres debe indicarse el número de elemento que se solicita. Después de introducir todos 
+        los elementos se tiene que mostrar la siguiente información por pantalla:
+        •	mostrar los nombres de los socios tal y como se han introducido
+        •	indicar el número socios que hay
+        •	mostrar el nombre de los socios ordenados por orden alfabético
+        •	mostrar el nombre de los socios en orden inverso al introducido
+        */
+       
+        let a = new Array();//Declaracion del array
+
+        for (let i = 0; i < 10; i++) {
+            let nombre = prompt(`Dame el nombre del ${i + 1} º`)
+            a.push(nombre);//Añade un elemento al final de la lista 
+        }
+        let b = a.slice();//crea una copia del original, crea un subarray sin modificar el original
+
+        console.log(a);//Muestra el array
+        console.log(a.length + " miembros")//Dice el numero de miembros
+        console.log(a.sort())//Ordena el array 
+        console.log(b.reverse())//Me crea un reverse del introducido originalmente
+        console.log(Array.isArray(a)) //Devuelve true si es un array y false si no es un array
+        a.unshift(2); //Añade un elemento al principio de la lista
+
+        /*pop y shift permiten extraer, ya que no desaparecen sino que pueden asignarse a otra variable*/
+        a.shift(); //Borra la primera
+        a.pop(); //Borra la ultima
+
+        a.splice(2, 0, 50, 90);//A partir de la posicion 2 borro 0 y añado 50 y 90
+        a.splice(1, 2) //A partir de la posicion 1 borra 2 elementos
+        a.indexOf(); //Devuelve la posicion
+        a.lastIndexOf(); //Devuelve la ultima posicion
+
+        a.concat(b); //concatena dos o mas arrays
+        //a.sort("propiedades")
+    </script>
+</body>
+
+</html>
