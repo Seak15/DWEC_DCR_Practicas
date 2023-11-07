@@ -5,3 +5,9 @@ table {
     background-color: slategray;
     margin: 40px auto;
 }
+.celda{
+    border-right: solid 2px rgb(210, 208, 208);
+    border-bottom:ridge 2px rgb(34, 34, 34);
+    border-left:ridge 2px rgb(34, 34, 34);
+    border-top: solid 2px rgb(31, 29, 29) ;
+}

@@ -1,6 +1,6 @@
 // VARIABLES GLOBALES
-let filas = 10;
-let cols = 10;
+let filas = 12;
+let cols = 12;
 let lado = 25; // Lado de cada casilla
 
 function generarJuego() {
@@ -12,7 +12,7 @@ function generarTablero() {
     for (let f = 0; f < filas; f++) {
         tabla += `<tr>`;
         for (let c = 0; c < cols; c++) {
-            tabla += `<td id="celda-${c}-${f}" style="width:${lado}px; height:${lado}px">${f}/${c}</td>`;
+            tabla += `<td class="celda" id="celda-${c}-${f}" style="width:${lado}px; height:${lado}px"></td>`;
         }
         tabla += "</tr>";
     }
