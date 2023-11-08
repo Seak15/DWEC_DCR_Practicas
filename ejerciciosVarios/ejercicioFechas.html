@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <script>
+        let fechaHoy = new Date();
+        let fechaAntigua = new Date("1990-12-29 00:00:00");
+
+        // Calcula los valores de años, meses, días, horas, minutos y segundos
+
+        console.log("DÍAS QUE HAN PASADO ENTRE HOY Y EL 7 DE MAYO DE 1990");
+        let diferenciaMilisegundos = fechaHoy - fechaAntigua;
+
+        let anios = fechaHoy.getFullYear() - fechaAntigua.getFullYear();
+        let meses = fechaHoy.getMonth() - fechaAntigua.getMonth();
+        if (meses < 0) {
+            meses = 12 + meses; // Resta los meses, ya que puede ser negativo
+            anios-=1;
+        }
+        let dias = fechaHoy.getDate() - fechaAntigua.getDate();
+        if (dias < 0) {
+            // Ajusta el número de días en el mes anterior
+            meses-= 1;
+            fechaAntigua.setMonth(fechaAntigua.getMonth() - 1);
+            dias = fechaHoy.getDate() + (30 - fechaAntigua.getDate());
+        }
+        let horas = fechaHoy.getHours() - fechaAntigua.getHours();
+        if (horas < 0) {
+            horas = 24 + horas; // Resta las horas, ya que puede ser negativo
+        }
+        let minutos = fechaHoy.getMinutes() - fechaAntigua.getMinutes();
+        if (minutos < 0) {
+            minutos = 60 + minutos; // Resta los minutos, ya que puede ser negativo
+        }
+        let segundos = fechaHoy.getSeconds() - fechaAntigua.getSeconds();
+        if (segundos < 0) {
+            segundos = 60 + segundos; // Resta los segundos, ya que puede ser negativo
+        }
+
+        console.log("ARRAY BIDIMENSIONAL");
+        let array = [
+            {
+                años: anios,
+                meses: meses,
+                días: dias
+            },
+            {
+                horas: horas,
+                minutos: minutos,
+                segundos: segundos
+            }
+        ];
+        console.log(array);
+
+    </script>
+</body>
+
+</html>
