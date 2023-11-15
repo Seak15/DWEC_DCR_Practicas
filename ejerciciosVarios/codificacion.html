@@ -13,9 +13,6 @@
           return "Por favor, introduce una palabra válida.";
         }
 
-        // Convertir la palabra a minúsculas para hacer las comparaciones más sencillas
-        palabra = palabra.toLowerCase();
-
         // Inicializar la palabra encriptada con "pe"
         let palabraEncriptada = "pe";
 
@@ -25,9 +22,9 @@
           palabraEncriptada += palabra[i];
 
           // Verificar si la letra actual es una vocal
-          if ("aeiou".includes(palabra[i])) {
+          if ("aeiouAEIOU".includes(palabra[i])) {
             // Añadir "pe" después de la última vocal si aún no se ha añadido
-            if (i !== palabra.length - 1 && !"aeiou".includes(palabra[i+1])) { //Comprobar que si hay una vocal detras no lo añada
+            if (i !== palabra.length - 1 && !"aeiouAEIOU".includes(palabra[i+1])) { //Comprobar que si hay una vocal detras no lo añada
               palabraEncriptada += "pe";
             }
           }
