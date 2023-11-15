@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encriptado</title>
+  </head>
+  <body>
+    <script>
+      function encriptarPalabra(palabra) {
+        // Verificar si la palabra es válida
+        if (typeof palabra !== "string") {
+          return "Por favor, introduce una palabra válida.";
+        }
+
+        // Convertir la palabra a minúsculas para hacer las comparaciones más sencillas
+        palabra = palabra.toLowerCase();
+
+        // Inicializar la palabra encriptada con "pe"
+        let palabraEncriptada = "pe";
+
+        // Recorrer cada letra de la palabra
+        for (let i = 0; i < palabra.length; i++) {
+          // Añadir la letra actual a la palabra encriptada
+          palabraEncriptada += palabra[i];
+
+          // Verificar si la letra actual es una vocal
+          if ("aeiou".includes(palabra[i])) {
+            // Añadir "pe" después de la última vocal si aún no se ha añadido
+            if (i !== palabra.length - 1 && !"aeiou".includes(palabra[i+1])) { //Comprobar que si hay una vocal detras no lo añada
+              palabraEncriptada += "pe";
+            }
+          }
+        }
+
+        return palabraEncriptada;
+      }
+
+      console.log(encriptarPalabra("Sol"));
+      console.log(encriptarPalabra("Almendra"));
+      console.log(encriptarPalabra("caramelo"));
+      console.log(encriptarPalabra("caaaalavera"));
+      console.log(encriptarPalabra("karol"));
+    </script>
+  </body>
+</html>
