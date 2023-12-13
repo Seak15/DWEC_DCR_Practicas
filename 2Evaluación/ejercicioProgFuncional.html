@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "caja"></div>
+    <script>
+        /*Dada la lista de números:
+        const numeros = [1, 2, 3, 4, 5];
+        Usar map, filter y reduce para obtener los números duplicados, obtener los pares y la suma de todos.*/
+
+        let numeros = [1,2,3,4,5];
+
+        //DOBLES
+        let arrayDobles = numeros.map(num => num * 2);
+        document.getElementById("caja").innerHTML = "Numeros:<br>" + numeros + "<br><br>El doble:<br>" + arrayDobles;
+
+        //PARES
+        let arrayPares = numeros.filter(num => num % 2 == 0);
+        document.getElementById("caja").innerHTML += "<br><br>Los pares:<br>" + arrayPares;
+
+        //SUMA
+        let total = numeros.reduce((suma, num) => suma + num, 0);
+        document.getElementById("caja").innerHTML += "<br><br>La suma:<br>" + total;
+
+    </script>
+</body>
+</html>
