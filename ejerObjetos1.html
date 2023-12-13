@@ -20,11 +20,8 @@
         //Filtrar los usuarios mayores de 25 años
         
         let nuevoArray = usuarios.filter(usr => usr.edad >= 25); //Filtrando los que sean mayores de 25 años
-        let cadena = "";
-        for (let i = 0; i < nuevoArray.length; i++){ //Metiendo en una cadena los nombres que cumplan la condicion
-            cadena += nuevoArray[i].nombre + " : " + nuevoArray[i].edad + "<br>";
-        }
-        document.getElementById("usuarios").innerHTML = cadena;//Mostrando los nombres en la pantalla
+        document.getElementById("usuarios").innerHTML = "<h4>Usuarios mayores de 25</h4>" +
+        nuevoArray.map (usr => " " + usr.nombre + " ");//Mostrando los nombres en la pantalla
 
     </script>
 </body>

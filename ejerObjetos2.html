@@ -23,13 +23,12 @@
 
         //1.	Filtrar los usuarios mayores de edad (mayores o igual a 18 años).
         const mayoresEdad = usuarios.filter(usr => usr.edad >= 18);
-        for (let i = 0; i < mayoresEdad.length ; i++){
-            document.getElementById("caja").innerHTML += mayoresEdad[i].nombre + " : " + mayoresEdad[i].edad + "<br>";
-        }
+            document.getElementById("caja").innerHTML 
+            = "<h4>Mayores de 18:</h4>" + mayoresEdad.map(usr => " " + usr.nombre + " : " + usr.edad + " ");
 
         //2.	Calcular el promedio de edades de los usuarios filtrados.
         let media = mayoresEdad.reduce((media,usr) => media + usr.edad,0) / mayoresEdad.length;
-        document.getElementById("caja").innerHTML += "<br>Media edad: " + media;
+        document.getElementById("caja").innerHTML += "<h4>Media edades: </h4>" + media;
         
     </script>
 </body>
