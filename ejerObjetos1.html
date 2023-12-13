@@ -20,12 +20,17 @@
         //Filtrar los usuarios mayores de 25 años
         
         let nuevoArray = usuarios.filter(usr => usr.edad >= 25); //Filtrando los que sean mayores de 25 años
-        let cadena = "";
-        for (let i = 0; i < nuevoArray.length; i++){ //Metiendo en una cadena los nombres que cumplan la condicion
-            cadena += nuevoArray[i].nombre + " : " + nuevoArray[i].edad + "<br>";
-        }
-        document.getElementById("usuarios").innerHTML = cadena;//Mostrando los nombres en la pantalla
+        
+        //Duplicar la edad de esos usuarios filtrados.
+        let dobleEdad = nuevoArray.map(usr => usr.edad * 2);
 
+        document.getElementById("usuarios").innerHTML = 
+        nuevoArray.map((usr, cont) => 
+        " " + usr.nombre + " : " + dobleEdad[cont] + " ");
+
+        //Obtener la suma total de las edades duplicadas.
+        document.getElementById("usuarios").innerHTML += 
+        "<br><br>Suma edades : " + dobleEdad.reduce((suma,edad) => suma + edad);//Mostrando la suma de las edades
     </script>
 </body>
 

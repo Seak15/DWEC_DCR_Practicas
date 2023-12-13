@@ -9,7 +9,7 @@
 
 <body>
     <h3>EJERCICIO 2 OBJETOS</h3>
-    <div id = "caja"></div>
+    <div id="caja"></div>
     <script>
         // Lista de usuarios
         const usuarios = [
@@ -23,14 +23,18 @@
 
         //1.	Filtrar los usuarios mayores de edad (mayores o igual a 18 años).
         const mayoresEdad = usuarios.filter(usr => usr.edad >= 18);
-        for (let i = 0; i < mayoresEdad.length ; i++){
+        for (let i = 0; i < mayoresEdad.length; i++) {
             document.getElementById("caja").innerHTML += mayoresEdad[i].nombre + " : " + mayoresEdad[i].edad + "<br>";
         }
 
-        //2.	Calcular el promedio de edades de los usuarios filtrados.
-        let media = mayoresEdad.reduce((media,usr) => media + usr.edad,0) / mayoresEdad.length;
-        document.getElementById("caja").innerHTML += "<br>Media edad: " + media;
-        
+        //3.	Encontrar al usuario más joven de entre los filtrados.
+        const usuarioMasJoven = mayoresEdad.reduce((usuarioMasJoven, usuarioActual) => {
+            return usuarioActual.edad < usuarioMasJoven.edad ? usuarioActual : usuarioMasJoven;
+        },mayoresEdad[0]) //Sacamos al usuario mas joven
+
+        document.getElementById("caja").innerHTML += "<br><br>Usuario mas joven : " + usuarioMasJoven.nombre;
+
+        //4.	Obtener una lista de nombres de usuarios que empiezan con la letra 'A'. 
     </script>
 </body>
 
