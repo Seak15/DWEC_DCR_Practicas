@@ -1,0 +1,43 @@
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .contador {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="button">CONTADOR</button>
+    <div id="contador" class="contador">0</div>
+
+    <script>
+        let cont = 0; //Contador 
+        document.getElementById("button").addEventListener("mousedown", function (e){
+            if (e.button == 0){ //Click Izquierdo
+                cont ++;
+            }else if(e.button == 2){//Click Derecho
+                document.addEventListener("contextmenu", function (e){ 
+                    e.preventDefault(); //Ocultar el ContextMenu
+                });
+                cont--;
+            }
+            document.getElementById("contador").innerHTML = cont;//Actulizar contador
+        });
+    </script>
+</body>
+</html>
+
+
