@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>EJERCICIO 2 OBJETOS</h3>
+    <div id = "caja"></div>
+    <script>
+        // Lista de usuarios
+        const usuarios = [
+            { id: 1, nombre: 'Juan', edad: 25 },
+            { id: 2, nombre: 'María', edad: 30 },
+            { id: 3, nombre: 'Pedro', edad: 20 },
+            { id: 4, nombre: 'Ana', edad: 35 },
+            { id: 5, nombre: 'Luisa', edad: 22 },
+            { id: 6, nombre: 'Alberto', edad: 19 },
+        ];
+
+        //1.	Filtrar los usuarios mayores de edad (mayores o igual a 18 años).
+        const mayoresEdad = usuarios.filter(usr => usr.edad >= 18);
+        for (let i = 0; i < mayoresEdad.length ; i++){
+            document.getElementById("caja").innerHTML += mayoresEdad[i].nombre + " : " + mayoresEdad[i].edad + "<br>";
+        }
+
+        //2.	Calcular el promedio de edades de los usuarios filtrados.
+        let media = mayoresEdad.reduce((media,usr) => media + usr.edad,0) / mayoresEdad.length;
+        document.getElementById("caja").innerHTML += "<br>Media edad: " + media;
+        
+    </script>
+</body>
+
+</html>
