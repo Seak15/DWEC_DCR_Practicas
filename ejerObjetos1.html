@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>EJERCICIO 1 OBJETOS</h3>
+    <div id = "usuarios"></div>
+    <script>
+        const usuarios = [
+            { id: 1, nombre: 'Juan', edad: 25 },
+            { id: 2, nombre: 'María', edad: 30 },
+            { id: 3, nombre: 'Pedro', edad: 20 },
+            { id: 4, nombre: 'Ana', edad: 35 },];
+
+        //Filtrar los usuarios mayores de 25 años
+        
+        let nuevoArray = usuarios.filter(usr => usr.edad >= 25); //Filtrando los que sean mayores de 25 años
+        
+        //Duplicar la edad de esos usuarios filtrados.
+        let dobleEdad = nuevoArray.map(usr => usr.edad * 2);
+
+        document.getElementById("usuarios").innerHTML = 
+        nuevoArray.map((usr, cont) => 
+        " " + usr.nombre + " : " + dobleEdad[cont] + " ");
+
+        //Obtener la suma total de las edades duplicadas.
+        document.getElementById("usuarios").innerHTML += 
+        "<br><br>Suma edades : " + dobleEdad.reduce((suma,edad) => suma + edad);//Mostrando la suma de las edades
+    </script>
+</body>
+
+</html>
