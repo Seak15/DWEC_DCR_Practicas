@@ -63,6 +63,13 @@ function clickIzquierdo(idCelda) {
     } 
 }
 
+function obtenerNumero(celda){
+    if (!celdasBomba.includes(celda)||
+        !celdasBomba.includes()){
+            
+        }
+}
+
 // Llama a la función para iniciar el juego cuando la página se carga completamente.
 document.addEventListener("DOMContentLoaded", function() {
     generarJuego();

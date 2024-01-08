@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Document Object Model</title>
+    <style>
+        .miClase {
+            color: red;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", inicio);
+
+        function inicio() {
+            document.getElementById("crearParrafo").addEventListener("click", crearParrafo);
+            document.getElementById("crearImagen").addEventListener("click", crearImagen);
+            document.getElementById("borrarUltimo").addEventListener("click", borrarUltimo);
+            document.getElementById("borrarPrimero").addEventListener("click", borrarPrimero);
+            document.getElementById("sustituirPrimVacio").addEventListener("click", sustituirPrimero);
+        }
+
+        function crearParrafo() {
+            let parrafo = document.createElement("p"); //Creamos el párrafo
+            let texto = document.createTextNode(document.getElementById("texto").value);//Coger el valor del textArea
+            parrafo.appendChild(texto);//AppendCHild para dar el valor al parrafo
+            parrafo.setAttribute("class", "miclase");//Asignamos clase
+            let cont = document.getElementById("div1");
+            cont.appendChild(parrafo);//Lo añadimos al div
+        }
+
+        function crearImagen() {
+            let imagen = document.createElement("img"); //Creamos el la imagen
+            let ruta = prompt("Introduce una ruta"); //Damos valor a la ruta de la imagen
+            imagen.src = ruta; //Asignamos la ruta a la imagen
+            let cont = document.getElementById("div1"); 
+            cont.appendChild(imagen); //Insertamos la imagen completa en el div
+        }
+
+        function borrarUltimo (){
+            var cont = document.getElementById("div1");
+            var hijo = cont.lastChild; //Seleccionamos en hijo al ultimo hijo
+            cont.removeChild(hijo); //Borramos el ultimo hijo
+        }
+
+        function borrarPrimero (){
+            var cont = document.getElementById("div1");
+            var hijo = cont.firstChild; //Seleccionamos en hijo al primer hijo
+            cont.removeChild(hijo); //Borramos el ultimo hijo
+        }
+
+        function sustituirPrimero(){
+            var cont = document.getElementById("div1");
+            var hijo = cont.firstChild; //Seleccionamos en hijo al primer hijo
+
+            //Creamos el texto a reemplazar
+            var texto = document.createTextNode("Parrafo reemplazado");
+
+            // Reemplazamos el primer hijo con el nodo de texto creado
+            cont.replaceChild(texto, hijo);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <br />
+    <textarea id="texto"></textarea>
+    <br />
+    <button id="crearParrafo">Crear párrafo</button>
+    <button id="crearImagen">Crear imagen</button>
+    <button id="borrarUltimo">Borrar último</button>
+    <button id="borrarPrimero">Borrar primero</button>
+    <button id="sustituirPrimVacio">Sustituir primer párrafo</button>
+</body>
+
+
+</html>
