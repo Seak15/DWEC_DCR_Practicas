@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Document Object Model</title>
+    
+</head>
+
+<body>
+
+    <div id="bloque3">
+        <h2>DAM</h2>
+        <ul id="lista">
+            <li>Sistemas Gestión Empresarial</li>
+            <li>Programación Multimedia y Disp. Móviles</li>
+            <li>Desarrollo de Interfaces</li>
+        </ul>
+    </div>
+    
+     <div id="bloque10">
+        <h2>DAW</h2>
+        <ul id="lista">
+            <li>DWES</li>
+            <li>DWEC</li>
+	        <li>Despliegue Web</li>
+	        <li>Diseño Interfaces Web </li>
+        </ul>
+    </div>
+    
+    <div id="texto"></div>
+
+    <script>
+        window.addEventListener("load", inicio);
+
+        function inicio(){
+            for (let i=0; i < document.getElementsByTagName("h2").length; i++){ //getElementsByTagName() devuelve un array
+                document.getElementsByTagName("h2")[i].addEventListener("click", cursar);
+            }
+        }
+
+        function cursar(e){
+            var h2 = e.target;
+            var texto = "<h2>TU SELECCION</h2>";
+            texto += "Has elegido el ciclo: " + h2.textContent;
+            var padre = h2.parentElement; //vamos al padre (div)
+            texto += "<br>La clase está ubicada en el " + padre.id;//Id del div
+            var ul = h2.nextElementSibling; //Avanzamos al ul
+            texto += "<br>Los modulos que contiene son: " + ul.children.length //Cantidad de li
+            var hijo = ul.firstChild;
+            while (hijo != null){ //Recorremos los hijos de ul hasta que no haya mas
+                texto +="<br>" + hijo.textContent;
+                hijo = hijo.nextElementSibling;//Avanzamos al siguiente hermano                
+            }
+            document.getElementById("texto").innerHTML = texto; //Mostramos por pantalla
+        }
+    </script>
+</body>
+
+</html>
+
+<!--Suponiendo que no se saben el tipo de etiquetas (para utilizar  ByTagname) Al pulsar h2 obtener el 
+bloque en el que se imparte y los módulos que se estudian (extraer el identificador del div superior 
+y el identificador de cada li)-->
