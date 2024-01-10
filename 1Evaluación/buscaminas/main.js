@@ -14,24 +14,27 @@ function generarJuego() {
 }
 
 function generarTablero() {
-    let tabla = "";
-    for (let f = 0; f < filas; f++) {
-        tabla += `<tr>`;
-        for (let c = 0; c < cols; c++) {
-            // Identificador único para cada celda
-            tabla += `<td class="celda" id="celda-${c}-${f}" style="width:${lado}px; height:${lado}px"></td>`;
-        }
-        tabla += "</tr>";
-    }
     let tableroHTML = document.getElementById("tablero");
-    tableroHTML.innerHTML = tabla;
+    // Limpiar el contenido existente antes de generar el nuevo tablero
+    tableroHTML.innerHTML = "";
 
-    // Añadir evento de click izquierdo a cada celda
-    let celdas = document.getElementsByClassName("celda");
-    for (let i = 0; i < celdas.length; i++) {
-        celdas[i].addEventListener("click", function(event) {
-            clickIzquierdo(event.target.id);
-        });
+    for (let f = 0; f < filas; f++) {
+        let fila = document.createElement("tr");
+        for (let c = 0; c < cols; c++) {
+            let celda = document.createElement("td");
+            celda.className = "celda";
+            celda.id = `celda-${c}-${f}`;
+            celda.style.width = `${lado}px`;
+            celda.style.height = `${lado}px`;
+
+            // Añadir evento de click izquierdo a cada celda
+            celda.addEventListener("click", function(event) {
+                clickIzquierdo(event.target.id);
+            });
+
+            fila.appendChild(celda);
+        }
+        tableroHTML.appendChild(fila);
     }
 }
 
@@ -58,19 +61,16 @@ function clickIzquierdo(idCelda) {
     if (celdasBomba.includes(id)) {
         // Si hay bomba, mostrar mensaje o realizar acción correspondiente
         celda.style.backgroundColor = "red";
-        celda.innerHTML = "<img class = 'bombas' src='images/bomba.png' alt= 'bomba'>";
+        celda.innerHTML = "<img class='bombas' src='images/bomba.png' alt='bomba'>";
         alert("BOMBA!! Juego terminado.");
-    } 
+    } else {
+        //función para obtener el número
+    }
 }
 
-function obtenerNumero(celda){
-    if (!celdasBomba.includes(celda)||
-        !celdasBomba.includes()){
-            
-        }
+function obtenerNumero(celda) {
+    // Obtener numero segun bombas cercanas
 }
 
 // Llama a la función para iniciar el juego cuando la página se carga completamente.
-document.addEventListener("DOMContentLoaded", function() {
-    generarJuego();
-});
+document.addEventListener("DOMContentLoaded",generarJuego);

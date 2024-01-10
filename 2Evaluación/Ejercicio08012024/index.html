@@ -4,11 +4,6 @@
 <head>
     <meta charset="utf-8" />
     <title>Document Object Model</title>
-    <style>
-        .miClase {
-            color: red;
-        }
-    </style>
     <script>
         window.addEventListener("load", inicio);
 
@@ -18,6 +13,7 @@
             document.getElementById("borrarUltimo").addEventListener("click", borrarUltimo);
             document.getElementById("borrarPrimero").addEventListener("click", borrarPrimero);
             document.getElementById("sustituirPrimVacio").addEventListener("click", sustituirPrimero);
+            document.getElementById("punto").addEventListener("click", borrarañadirPunto);
         }
 
         function crearParrafo() {
@@ -33,23 +29,23 @@
             let imagen = document.createElement("img"); //Creamos el la imagen
             let ruta = prompt("Introduce una ruta"); //Damos valor a la ruta de la imagen
             imagen.src = ruta; //Asignamos la ruta a la imagen
-            let cont = document.getElementById("div1"); 
+            let cont = document.getElementById("div1");
             cont.appendChild(imagen); //Insertamos la imagen completa en el div
         }
 
-        function borrarUltimo (){
+        function borrarUltimo() {
             var cont = document.getElementById("div1");
             var hijo = cont.lastChild; //Seleccionamos en hijo al ultimo hijo
             cont.removeChild(hijo); //Borramos el ultimo hijo
         }
 
-        function borrarPrimero (){
+        function borrarPrimero() {
             var cont = document.getElementById("div1");
             var hijo = cont.firstChild; //Seleccionamos en hijo al primer hijo
             cont.removeChild(hijo); //Borramos el ultimo hijo
         }
 
-        function sustituirPrimero(){
+        function sustituirPrimero() {
             var cont = document.getElementById("div1");
             var hijo = cont.firstChild; //Seleccionamos en hijo al primer hijo
 
@@ -58,6 +54,23 @@
 
             // Reemplazamos el primer hijo con el texto creado
             cont.replaceChild(texto, hijo);
+
+        }
+
+        //Añadir un boton que añada/borre un "." al final de la linea.
+        function borrarañadirPunto() {
+            let miDiv = document.getElementById("div1");
+            let hijo = miDiv.firstChild;
+            while (hijo != null) {
+                if (hijo.textContent.charAt(hijo.textContent.length - 1) === ".") {
+                    hijo.textContent = hijo.textContent.slice(0, -1);
+                } 
+                else {
+                    hijo.textContent += ".";
+                }
+                hijo = hijo.nextElementSibling;
+            }
+
             
         }
     </script>
@@ -73,6 +86,7 @@
     <button id="borrarUltimo">Borrar último</button>
     <button id="borrarPrimero">Borrar primero</button>
     <button id="sustituirPrimVacio">Sustituir primer párrafo</button>
+    <button id="punto">Borrar/Añadir Punto</button>
 </body>
 
 
