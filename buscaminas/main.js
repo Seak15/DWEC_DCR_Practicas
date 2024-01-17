@@ -56,20 +56,98 @@ function clickIzquierdo(idCelda) {
     let id = idCelda;
     let celda = document.getElementById(id);
 
+    // Verificar si la celda ya ha sido pulsada
+    if (celda.classList.contains("pulsada")) {
+        return; // Salir de la función si la celda ya ha sido pulsada
+    }
+
     celda.style.backgroundColor = "rgb(171, 170, 170)";
     // Verificar si la celda actual está en la lista de celdas con bombas
     if (celdasBomba.includes(id)) {
         // Si hay bomba, mostrar mensaje o realizar acción correspondiente
-        celda.style.backgroundColor = "red";
+        celda.style.backgroundColor = "rgb(225, 111, 111)";
         celda.innerHTML = "<img class='bombas' src='images/bomba.png' alt='bomba'>";
         alert("BOMBA!! Juego terminado.");
+        //generarJuego();
     } else {
-        //función para obtener el número
+        let numero = document.createElement("i")
+        numero.textContent = obtenerNumero(idCelda)
+        numero.class = "number";
+        numero.style.fontWeight = "bold";
+        numero.style.fontFamily = "Verdana";
+
+        //Dando colores a cada numero
+        switch (obtenerNumero(idCelda)){
+            case 0:
+                numero.style.color = black;
+                break;
+            case 1:
+                numero.style.color = "blue";
+                break;
+            case 2:
+                numero.style.color = "green";
+                break;
+            case 3:
+                numero.style.color = "red";
+                break;
+            default:
+                numero.style.color = "orange";
+                break;
+        }
+
+        celda.appendChild(numero);
     }
+
+    // Marcar la celda como pulsada y quitar el evento de clic
+    celda.classList.add("pulsada");
+    celda.removeEventListener("click", function(event) {
+        clickIzquierdo(event.target.id);
+    });
 }
 
-function obtenerNumero(celda) {
-    // Obtener numero segun bombas cercanas
+function obtenerNumero(idCelda) {
+    // Obtener las coordenadas de la celda a partir de su ID
+    const coordenadas = idCelda.split('-');
+    const c = parseInt(coordenadas[1]);
+    const f = parseInt(coordenadas[2]);
+
+    // Verificar si la celda actual tiene una bomba
+    if (celdasBomba.includes(idCelda)) {
+        // Si hay bomba, retornar -1 para indicar que la celda contiene una bomba
+        return -1;
+    }
+
+    let numeroBombas = 0;
+
+    // Verificar las celdas vecinas para contar el número de bombas
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {//Comprobando los alrededores
+            const nuevaFila = f + i; 
+            const nuevaColumna = c + j;
+
+            // Verificar si la nueva posición está dentro de los límites del tablero
+            if (nuevaFila >= 0 && nuevaFila < filas && nuevaColumna >= 0 && nuevaColumna < cols) {
+                // Construir el ID de la celda vecina
+                const idVecina = `celda-${nuevaColumna}-${nuevaFila}`;
+
+                // Incrementar el contador si hay una bomba en la celda vecina
+                if (celdasBomba.includes(idVecina)) {
+                    numeroBombas++;
+                }
+            }
+        }
+    }
+
+    // Retornar el número de bombas en la celda
+    return numeroBombas;
+}
+function abrirTablero() {
+    for (let f = 0; f < filas; f++) {
+        for (let c = 0; c < cols; c++) {
+            let id = `celda-${c}-${f}`;
+            clickIzquierdo(id);
+        }
+    }
 }
 
 // Llama a la función para iniciar el juego cuando la página se carga completamente.
