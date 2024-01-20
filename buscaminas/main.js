@@ -1,8 +1,8 @@
 // VARIABLES GLOBALES
-let filas = 15;
-let cols = 15;
-let lado = 20; // Lado de cada casilla
-let bombas = 30;
+let filas = 13;
+let cols = 13;
+let lado = 24; // Lado de cada casilla
+let bombas = 15;
 
 // Almacena las celdas con bombas
 let celdasBomba = [];
@@ -59,30 +59,31 @@ function clickIzquierdo(idCelda) {
     let id = idCelda;
     let celda = document.getElementById(id);
 
-    // Verificar si la celda ya ha sido pulsada
-    if (celda.classList.contains("pulsada")) {
-        return; // Salir de la función si la celda ya ha sido pulsada
+    // Verificar si la celda ya ha sido pulsada o marcada con bandera
+    if (celda.classList.contains("pulsada") || celda.classList.contains("bandera")) {
+        return; // Salir de la función si la celda ya ha sido pulsada o marcada con bandera
     }
 
     celda.style.backgroundColor = "rgb(171, 170, 170)";
+    
     // Verificar si la celda actual está en la lista de celdas con bombas
     if (celdasBomba.includes(id)) {
         // Si hay bomba, mostrar mensaje o realizar acción correspondiente
         celda.style.backgroundColor = "rgb(225, 111, 111)";
         celda.innerHTML = "<img class='bombas' src='images/bomba.png' alt='bomba'>";
         setTimeout(function () {
-            //Damos la opción de jugar de nuevo o de salir de la partida
-            confirm("BOMBA! HAS PERDIDO\nQuieres jugar de nuevo?") ? generarTablero() :
+            // Damos la opción de jugar de nuevo o de salir de la partida
+            confirm("BOMBA! HAS PERDIDO\nQuieres jugar de nuevo?") ? generarJuego() :
                 document.getElementById("tablero").innerHTML = "GRACIAS POR JUGAR";
         }, 200);
     } else {
         abrirArea(parseInt(id.split('-')[1]), parseInt(id.split('-')[2]));
     }
 
-    // Marcar la celda como pulsada y quitar el evento de clic
+    // Marcar la celda como pulsada y quitar el evento de clic derecho
     celda.classList.add("pulsada");
-    celda.removeEventListener("click", function (event) {
-        clickIzquierdo(event.target.id);
+    celda.removeEventListener("contextmenu", function (event) {
+        clickDerecho(event.target.id);
     });
 }
 
@@ -123,23 +124,23 @@ function obtenerNumero(idCelda) {
 }
 
 function abrirArea(c, f) {
-    //Se crea una pila con las coordenadas de la celda
-    const stack = [{ c, f }];
+    // Se crea un array con las coordenadas de la celda
+    const coordenadas = [{ c, f }];
 
-    while (stack.length > 0) { //Se ejecuta mientras que la pila no esté vacía
-        const { c, f } = stack.pop(); //Se toma el ultimo objeto
+    while (coordenadas.length > 0) { // Se ejecuta mientras que el array no esté vacío
+        const { c, f } = coordenadas.shift(); // Se toma el primer objeto
         const idCelda = `celda-${c}-${f}`;
-        const celda = document.getElementById(idCelda); //Id de la celda actual
+        const celda = document.getElementById(idCelda); // Id de la celda actual
 
-        if (!celda || celda.classList.contains("pulsada")) { //Se verifica si la celda no existe o ya ha sido pulsada
+        if (!celda || celda.classList.contains("pulsada")) { // Se verifica si la celda no existe o ya ha sido pulsada
             continue;
         }
 
-        const numero = obtenerNumero(idCelda); //Se obtiene el numero de las bombas cercanas
+        const numero = obtenerNumero(idCelda); // Se obtiene el numero de las bombas cercanas
 
-        if (numero === 0) { 
-            // Aqui es donde abrimos las celdas cercanas cambiando el fondo de color y considerandolas pulsadas
-            celda.classList.add("pulsada");
+        if (numero === 0) { //Solo entra si no hay bombas cerca
+            // Aquí es donde abrimos las celdas cercanas cambiando el fondo de color y considerándolas pulsadas
+            celda.classList.add("pulsada"); // Añadimos las celdas desbloqueadas a la lista de las celdas pulsadas
             celda.style.backgroundColor = "rgb(171, 170, 170)";
 
             for (let i = -1; i <= 1; i++) {
@@ -148,12 +149,12 @@ function abrirArea(c, f) {
                     const nuevaF = f + j;
 
                     if (nuevaC >= 0 && nuevaC < cols && nuevaF >= 0 && nuevaF < filas) {
-                        stack.push({ c: nuevaC, f: nuevaF });
+                        coordenadas.push({ c: nuevaC, f: nuevaF }); //Se añade la siguiente celda
                     }
                 }
             }
-        } else if (numero > 0) { 
-            //Aqui se tratan las celdas con bombas cerca, dando color a sus numeros y poniendo el numero correcto
+        } else if (numero > 0) { //Entra aquí cuando aparece una bomba cerca
+            // Aquí se tratan las celdas con bombas cerca, dando color a sus números y poniendo el número correcto
             celda.classList.add("pulsada");
             celda.style.backgroundColor = "rgb(171, 170, 170)";
 
@@ -163,7 +164,7 @@ function abrirArea(c, f) {
             numeroElement.style.fontWeight = "bold";
             numeroElement.style.fontFamily = "Verdana";
 
-            switch (numero) {
+            switch (numero) { // Colores de las celdas con bombas cerca
                 case 1:
                     numeroElement.style.color = "blue";
                     break;
@@ -178,29 +179,57 @@ function abrirArea(c, f) {
                     break;
             }
 
-            celda.appendChild(numeroElement);
+            celda.appendChild(numeroElement); // Se añade el número a la celda correspondiente
         }
     }
 }
+
 function clickDerecho(idCelda) {
     let id = idCelda;
     let celda = document.getElementById(id);
 
-    // Verificar si la celda ya ha sido pulsada o marcada con bandera
-    if (celda.classList.contains("pulsada") || celda.classList.contains("bandera")) {
-        return; // Salir de la función si la celda ya ha sido pulsada o marcada con bandera
+    // Verificar si la celda ya ha sido pulsada
+    if (celda.classList.contains("pulsada")) {
+        return; // Salir de la función si la celda ya ha sido pulsada
     }
 
-    // Agregar o quitar la clase "bandera" en función de si la celda ya tiene una bandera
-    if (celda.classList.contains("bandera")) {
+    // Buscar el elemento <img> de la bandera en la celda
+    let banderaElement = celda.querySelector(".bandera-icon");
+
+    // Si ya existe el elemento <img>, eliminar la bandera
+    if (banderaElement) {
         celda.classList.remove("bandera");
+        celda.removeChild(banderaElement);
     } else {
+        // Crear un elemento <img> para el icono de la bandera
+        banderaElement = document.createElement("img");
+        banderaElement.src = "images/bandera.png"; // Ruta de la imagen de la bandera
+        banderaElement.classList.add("bandera-icon"); // Agregar una clase para aplicar estilos desde CSS
+
+        // Agregar la clase "bandera" a la celda
         celda.classList.add("bandera");
+
+        // Añadir el elemento <img> a la celda
+        celda.appendChild(banderaElement);
     }
 
     // Evitar que aparezca el menú contextual del navegador
     event.preventDefault();
+    
+    // Detener la propagación del evento para evitar que llegue al manejador de clic derecho de la celda
+    event.stopPropagation();
 }
+
+// Agregar un manejador de eventos de clic derecho específico para el icono de la bandera
+document.addEventListener("contextmenu", function (event) {
+    if (event.target.classList.contains("bandera-icon")) {
+        // Evitar que aparezca el menú contextual del navegador cuando se hace clic derecho en el icono de la bandera
+        event.preventDefault();
+    }
+});
+
+
+
 
 // Llama a la función para iniciar el juego cuando la página se carga completamente.
 document.addEventListener("DOMContentLoaded", generarJuego);
