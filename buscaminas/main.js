@@ -2,7 +2,7 @@
 let filas = 13;
 let cols = 13;
 let lado = 24; // Lado de cada casilla
-let bombas = 15;
+let bombas = 10;
 
 // Almacena las celdas con bombas
 let celdasBomba = [];
