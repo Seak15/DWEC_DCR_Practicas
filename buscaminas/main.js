@@ -29,7 +29,7 @@ function modoMedio(){
 }
 
 function modoDificil(){
-    bombas = 25;
+    bombas = 40;
     filas = 16;
     cols = 16;
     generarJuego();
@@ -250,6 +250,8 @@ document.addEventListener("contextmenu", function (event) {
     if (event.target.classList.contains("bandera-icon")) {
         // Evitar que aparezca el menú contextual del navegador cuando se hace clic derecho en el icono de la bandera
         event.preventDefault();
+        // Ejecutar la función clickDerecho() cuando se haga clic derecho en el icono de la bandera
+        clickDerecho(event.target.parentNode.id);
     }
 });
 
