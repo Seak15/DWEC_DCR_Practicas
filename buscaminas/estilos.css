@@ -1,18 +1,52 @@
-body{
-    background-color: rgb(45, 45, 45);
+
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
+
+
+body {
+    background-image: url("images/fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+
 }
+
+.botones{
+    text-align: center;
+}
+
+.boton {
+    background-color: #1a1a1a; /* Fondo oscuro para los botones */
+    border: none;
+    color: #fff; /* Texto blanco */
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efecto de iluminación al hacer hover */
+.boton:hover {
+    background-color: #0044ff; /* Cambio de color al hacer hover */
+    box-shadow: 0 0 10px #0044ff; /* Efecto de luz */
+}
+
 .titulo{
     text-align: center;
     font-size: 2.5em;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Sixtyfour', sans-serif;
     color:white;
 }
+
 table {
     background-color: slategray;
     margin: 40px auto;
 }
 .celda{
-    border-right: solid 2px rgb(210, 208, 208);
+    border-right: solid 2px rgb(91, 89, 89);
     border-bottom:ridge 2px rgb(34, 34, 34);
     border-left:ridge 2px rgb(34, 34, 34);
     border-top: solid 2px rgb(31, 29, 29) ;
@@ -20,6 +54,7 @@ table {
 }
 .celda:hover{
     background-color: rgb(131, 150, 168);
+    box-shadow: 0 0 20px #94dbe5; /* Efecto de luz */
 }
 
 .numero{
@@ -32,8 +67,8 @@ table {
 }
 
 .bandera-icon {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
 }
 
 

@@ -1,17 +1,41 @@
 // VARIABLES GLOBALES
 let filas = 13;
 let cols = 13;
-let lado = 24; // Lado de cada casilla
+let lado = 22; // Lado de cada casilla
 let bombas = 10;
-
-// Almacena las celdas con bombas
-let celdasBomba = [];
+let celdasBomba = []; // Almacena las celdas con bombas
 
 function generarJuego() {
-    generarTablero();
+    document.getElementById("facil").addEventListener("click", modoFacil);
+    document.getElementById("medio").addEventListener("click", modoMedio);
+    document.getElementById("dificil").addEventListener("click", modoDificil);
     ponerBombas();
+    generarTablero();
 }
 
+//DIFICULTADES DEL JUEGO
+function modoFacil (){
+    bombas = 5;
+    filas = 13;
+    cols = 13;
+    generarJuego();
+}
+
+function modoMedio(){
+    bombas = 10;
+    filas = 14;
+    cols = 14;
+    generarJuego();
+}
+
+function modoDificil(){
+    bombas = 25;
+    filas = 16;
+    cols = 16;
+    generarJuego();
+}
+
+//GENERAR EL TABLERO
 function generarTablero() {
     let tableroHTML = document.getElementById("tablero");
     // Limpiar el contenido existente antes de generar el nuevo tablero
@@ -42,6 +66,7 @@ function generarTablero() {
 }
 
 function ponerBombas() {
+    celdasBomba = [];
     let cont = 0;
     while (cont < bombas) {
         let f = Math.floor(Math.random() * filas);
@@ -203,7 +228,7 @@ function clickDerecho(idCelda) {
     } else {
         // Crear un elemento <img> para el icono de la bandera
         banderaElement = document.createElement("img");
-        banderaElement.src = "images/bandera.png"; // Ruta de la imagen de la bandera
+        banderaElement.src = "images/bandera2.png"; // Ruta de la imagen de la bandera
         banderaElement.classList.add("bandera-icon"); // Agregar una clase para aplicar estilos desde CSS
 
         // Agregar la clase "bandera" a la celda
