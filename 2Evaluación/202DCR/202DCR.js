@@ -7,24 +7,47 @@ function inicio() { //EVENTOS
     document.getElementById("msg").addEventListener("input", validarMsg)//MENSAJE
     document.getElementById("curso").addEventListener("input", validarCurso)//CURSO
     document.getElementById("color").addEventListener("input", validarColor)//COLOR
-    document.getElementById("enviar").addEventListener("submit", validar);//TODOS
+    document.getElementById("select").addEventListener("change", seleccionar)//SELECCIONAR DIAS 
+    document.getElementById("enviar").addEventListener("click", validar);//TODOS
     document.getElementById("enlace").addEventListener("click", clickEnlace)//ENLACE
 }
 
-function validar(e) { //Valida el formulario comprobando que todos los campos sean correctos
+function validar(e) { 
+    // Valida el formulario comprobando que todos los campos sean correctos
     e.preventDefault();
     let mensaje = document.getElementById("completo");
 
-    if (!validarNif() || !validarNombre() || !validarColor() || !validarMsg() || !validarDias || !validarFecha()) {
+    if (!validarNif() || !validarNombre() || !validarColor() || !validarMsg() || !validarDias() || !validarFecha()) {
         mensaje.style.color = "red";
         mensaje.innerHTML = "FORMULARIO ERRONEO";
     } else {
-        if (confirm("¿Desea enviar el formulario?")) {
-            mensaje.style.color = "green";
-            mensaje.innerHTML = "FORMULARIO ENVIADO";
-        }
+        // Mostrar SweetAlert de confirmación
+        Swal.fire({
+            title: '¿Desea enviar el formulario?',
+            text: "Una vez enviado, no se podrá modificar.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, enviar formulario'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario hace clic en "Aceptar", mostrar SweetAlert de confirmación de envío
+                Swal.fire({
+                    title: 'Formulario enviado',
+                    text: '¡El formulario ha sido enviado con éxito!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000 // Duración de la transición en milisegundos
+                }).then(function() {
+                    // Después de la transición, refrescar la página
+                    location.reload();
+                });
+            }
+        });
     }
 }
+
 
 function validarNombre() { //Validando el nombre
     let nombre = document.getElementById("nombre")
@@ -91,7 +114,7 @@ function validarCurso() {
     let curso = document.getElementById("curso");
 
     if (curso.value === "Añadir curso") {
-        let cursoNuevo = prompt("Añada un curso en formato yy/yy");
+        let cursoNuevo = prompt("Añada un curso en formato yy-yy");
         let patron = /^\d{1,2}\/\d{1,2}$/;
 
         if (patron.test(cursoNuevo)) {
@@ -138,7 +161,7 @@ function validarColor() { //Comprobar que al menos haya un color seleccionado
         return false
     }
     else {
-        mensajeError = "<img src= 'images/check.png'>";
+        mensajeError.innerHTML = "<img src= 'images/check.png'>";
         return true;
     }
 }
@@ -148,21 +171,43 @@ function clickEnlace() {
 }
 
 function validarDias() { //Comprobar que al menos haya un día seleccionado
-    let lunes = document.getElementById("lunes")
-    let martes = document.getElementById("martes")
-    let miercoles = document.getElementById("miercoles")
-    let jueves = document.getElementById("jueves")
-    let viernes = document.getElementById("viernes")
 
+    let dias = document.querySelectorAll("input[name='dia']")
     let mensaje = document.getElementById("errorDias")
+    let cont = 0;
 
     //Comprobamos que al menos uno esté seleccionado
-    if (!lunes.checked && !martes.checked && !miercoles.checked && !jueves.checked && !viernes.checked) {
-        mensaje.innerHTML = "Seleccione al menos un dia";
-        return false;
+    for (let i = 0; i < dias.length; i++){
+        if (dias[i].checked){
+            cont++;
+        }
     }
-    else {
+    if (cont >= 2){
         mensaje.innerHTML = "<img src= 'images/check.png'>";
         return true;
     }
+    else{
+        mensaje.innerHTML = "Seleccione al menos dos dias"
+        return false
+    }
+}
+
+function seleccionar(){
+    let select = document.getElementById("select");
+    let msg = document.getElementById("msgDias");
+    let dias = document.querySelectorAll("input[name='dia']") //Array con todos los dias 
+
+    if (select.checked){
+        for (let i = 0; i < dias.length; i++){
+            dias[i].checked = true;
+        }
+        msg.innerHTML = "Deseleccionar todo"
+    }
+    else{
+        for (let i = 0; i < dias.length; i++){
+            dias[i].checked = false;
+        }
+        msg.innerHTML = "Seleccionar todo"
+    }
+
 }

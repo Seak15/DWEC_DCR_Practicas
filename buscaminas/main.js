@@ -1,11 +1,20 @@
 // VARIABLES GLOBALES
 let filas = 13;
 let cols = 13;
-let lado = 22; // Lado de cada casilla
-let bombas = 10;
+let lado = 35; // Lado de cada casilla
 let celdasBomba = []; // Almacena las celdas con bombas
+let celdasBandera = [];
+contBombas = 0;
+
+// Llama a la función para iniciar el juego cuando la página se carga completamente.
+document.addEventListener("DOMContentLoaded", () => {
+    contador = document.getElementById("contador-bombas"); // Inicializa el contador dentro de la función
+    cont = parseInt(contador.textContent)
+    generarJuego();
+});
 
 function generarJuego() {
+    primeraCeldaPulsada = null;
     document.getElementById("facil").addEventListener("click", modoFacil);
     document.getElementById("medio").addEventListener("click", modoMedio);
     document.getElementById("dificil").addEventListener("click", modoDificil);
@@ -16,24 +25,31 @@ function generarJuego() {
 //DIFICULTADES DEL JUEGO
 function modoFacil (){
     bombas = 5;
-    filas = 13;
-    cols = 13;
+    filas = 9;
+    cols = 9;
+    cont = bombas;
+    contador.innerHTML = cont;
     generarJuego();
 }
 
 function modoMedio(){
     bombas = 10;
-    filas = 14;
-    cols = 14;
+    filas = 10;
+    cols = 10;
+    cont = bombas
+    contador.innerHTML = cont;
     generarJuego();
 }
 
 function modoDificil(){
-    bombas = 40;
-    filas = 16;
-    cols = 16;
+    bombas = 20;
+    filas = 11;
+    cols = 11;
+    cont = bombas;
+    contador.innerHTML = cont;
     generarJuego();
 }
+
 
 //GENERAR EL TABLERO
 function generarTablero() {
@@ -68,11 +84,13 @@ function generarTablero() {
 function ponerBombas() {
     celdasBomba = [];
     let cont = 0;
+    // Generar el resto de las bombas
     while (cont < bombas) {
-        let f = Math.floor(Math.random() * filas);
-        let c = Math.floor(Math.random() * cols);
-        let id = `celda-${c}-${f}`; // Identificador Celda
+        f = Math.floor(Math.random() * filas);
+        c = Math.floor(Math.random() * cols);
+        id = `celda-${c}-${f}`;
 
+        // Verificar que la celda no haya sido seleccionada como bomba antes
         if (!celdasBomba.includes(id)) {
             celdasBomba.push(id);
             cont++;
@@ -80,9 +98,22 @@ function ponerBombas() {
     }
 }
 
+
 function clickIzquierdo(idCelda) {
     let id = idCelda;
     let celda = document.getElementById(id);
+    
+    // Verificar si es la primera celda pulsada
+    if (primeraCeldaPulsada === null) {
+        // Si es la primera celda, asegurarse de que no sea una bomba
+        while (celdasBomba.includes(id)) {
+            // Si la primera celda es una bomba, generar un nuevo id y obtener la celda correspondiente
+            id = generarNuevoId();
+            celda = document.getElementById(id);
+        }
+        // Actualizar la variable global para almacenar la primera celda pulsada
+        primeraCeldaPulsada = id;
+    }
 
     // Verificar si la celda ya ha sido pulsada o marcada con bandera
     if (celda.classList.contains("pulsada") || celda.classList.contains("bandera")) {
@@ -96,12 +127,29 @@ function clickIzquierdo(idCelda) {
         // Si hay bomba, mostrar mensaje o realizar acción correspondiente
         celda.style.backgroundColor = "rgb(225, 111, 111)";
         celda.innerHTML = "<img class='bombas' src='images/bomba.png' alt='bomba'>";
-        setTimeout(function () {
-            // Damos la opción de jugar de nuevo o de salir de la partida
-            confirm("BOMBA! HAS PERDIDO\nQuieres jugar de nuevo?") ? generarJuego() :
-                document.getElementById("tablero").innerHTML = "GRACIAS POR JUGAR";
-        }, 200);
+        // Agregamos la clase para que se produzca el temblor
+        document.getElementById("tablero").classList.add("shake");
+        
+            setTimeout(function () {
+                // Damos la opción de jugar de nuevo o de salir de la partida
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Perdiste!',
+                    text: 'Inténtalo de nuevo.',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'fondo-alerta' // Agrega una clase personalizada al popup
+                    }
+                }).then((result) => {
+                    // Si el usuario hace clic en el botón "OK", refrescar la página
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                }); 
+            }, 500); // Tiempo de espera antes de mostrar la alerta
+        
     } else {
+        //Abre el area, recibiendo como parametro la fila y la columna
         abrirArea(parseInt(id.split('-')[1]), parseInt(id.split('-')[2]));
     }
 
@@ -110,6 +158,15 @@ function clickIzquierdo(idCelda) {
     celda.removeEventListener("contextmenu", function (event) {
         clickDerecho(event.target.id);
     });
+
+    ganarJuego();
+}
+
+// Función para generar un nuevo id aleatorio para la primera celda que no sea una bomba
+function generarNuevoId() {
+    let f = Math.floor(Math.random() * filas);
+    let c = Math.floor(Math.random() * cols);
+    return `celda-${c}-${f}`;
 }
 
 function obtenerNumero(idCelda) {
@@ -149,23 +206,30 @@ function obtenerNumero(idCelda) {
 }
 
 function abrirArea(c, f) {
-    // Se crea un array con las coordenadas de la celda
     const coordenadas = [{ c, f }];
+    let banderaElement;
 
-    while (coordenadas.length > 0) { // Se ejecuta mientras que el array no esté vacío
-        const { c, f } = coordenadas.shift(); // Se toma el primer objeto
+    while (coordenadas.length > 0) {
+        const { c, f } = coordenadas.shift();
         const idCelda = `celda-${c}-${f}`;
-        const celda = document.getElementById(idCelda); // Id de la celda actual
+        const celda = document.getElementById(idCelda);
 
-        if (!celda || celda.classList.contains("pulsada")) { // Se verifica si la celda no existe o ya ha sido pulsada
+        if (!celda || celda.classList.contains("pulsada")) {
             continue;
         }
 
-        const numero = obtenerNumero(idCelda); // Se obtiene el numero de las bombas cercanas
+        // Verificar si la celda tiene una bandera y eliminarla si es así
+        banderaElement = celda.querySelector(".bandera-icon");
+        if (banderaElement) {
+            banderaElement.remove();
+            cont++;
+            contador.innerHTML = cont;
+        }
 
-        if (numero === 0) { //Solo entra si no hay bombas cerca
-            // Aquí es donde abrimos las celdas cercanas cambiando el fondo de color y considerándolas pulsadas
-            celda.classList.add("pulsada"); // Añadimos las celdas desbloqueadas a la lista de las celdas pulsadas
+        const numero = obtenerNumero(idCelda);
+
+        if (numero === 0) {
+            celda.classList.add("pulsada");
             celda.style.backgroundColor = "rgb(171, 170, 170)";
 
             for (let i = -1; i <= 1; i++) {
@@ -174,12 +238,11 @@ function abrirArea(c, f) {
                     const nuevaF = f + j;
 
                     if (nuevaC >= 0 && nuevaC < cols && nuevaF >= 0 && nuevaF < filas) {
-                        coordenadas.push({ c: nuevaC, f: nuevaF }); //Se añade la siguiente celda
+                        coordenadas.push({ c: nuevaC, f: nuevaF });
                     }
                 }
             }
-        } else if (numero > 0) { //Entra aquí cuando aparece una bomba cerca
-            // Aquí se tratan las celdas con bombas cerca, dando color a sus números y poniendo el número correcto
+        } else if (numero > 0) {
             celda.classList.add("pulsada");
             celda.style.backgroundColor = "rgb(171, 170, 170)";
 
@@ -187,9 +250,10 @@ function abrirArea(c, f) {
             numeroElement.textContent = numero;
             numeroElement.className = "number";
             numeroElement.style.fontWeight = "bold";
+            numeroElement.style.fontSize = "23px";
             numeroElement.style.fontFamily = "Verdana";
 
-            switch (numero) { // Colores de las celdas con bombas cerca
+            switch (numero) {
                 case 1:
                     numeroElement.style.color = "blue";
                     break;
@@ -204,10 +268,11 @@ function abrirArea(c, f) {
                     break;
             }
 
-            celda.appendChild(numeroElement); // Se añade el número a la celda correspondiente
+            celda.appendChild(numeroElement);
         }
     }
 }
+
 
 function clickDerecho(idCelda) {
     let id = idCelda;
@@ -225,38 +290,72 @@ function clickDerecho(idCelda) {
     if (banderaElement) {
         celda.classList.remove("bandera");
         celda.removeChild(banderaElement);
+
+        // Eliminar el id de la celda del array de celdasBandera
+        let index = celdasBandera.indexOf(id);
+        if (index !== -1) {
+            celdasBandera.splice(index, 1);
+        }
+        cont ++;
+        contador.innerHTML = cont; //Modificando el contador
     } else {
         // Crear un elemento <img> para el icono de la bandera
         banderaElement = document.createElement("img");
         banderaElement.src = "images/bandera2.png"; // Ruta de la imagen de la bandera
         banderaElement.classList.add("bandera-icon"); // Agregar una clase para aplicar estilos desde CSS
 
-        // Agregar la clase "bandera" a la celda
+        // Agregar la bandera a la celda
         celda.classList.add("bandera");
-
-        // Añadir el elemento <img> a la celda
         celda.appendChild(banderaElement);
+
+        // Agregar el id de la celda al array de celdasBandera
+        celdasBandera.push(id);
+        cont--;
+        contador.innerHTML = cont; //Modificando el contador
     }
 
     // Evitar que aparezca el menú contextual del navegador
     event.preventDefault();
-    
-    // Detener la propagación del evento para evitar que llegue al manejador de clic derecho de la celda
+    // Detener la propagación 
     event.stopPropagation();
+
+    ganarJuego();
 }
 
 // Agregar un manejador de eventos de clic derecho específico para el icono de la bandera
 document.addEventListener("contextmenu", function (event) {
-    if (event.target.classList.contains("bandera-icon")) {
-        // Evitar que aparezca el menú contextual del navegador cuando se hace clic derecho en el icono de la bandera
+    if (event.target.classList.contains("bandera-icon")) {  
         event.preventDefault();
-        // Ejecutar la función clickDerecho() cuando se haga clic derecho en el icono de la bandera
-        clickDerecho(event.target.parentNode.id);
+        clickDerecho(event.target.parentNode.id); //Tambien aplica a la imagen de la bandera
     }
 });
 
+/**
+ * Esta Funcion comparará el array de bombas con el array de banderas, en el momento que coincidan se ganará 
+ * la partida
+ */
+function ganarJuego(){
+    celdasBomba.sort();
+    celdasBandera.sort(); 
 
-
-
-// Llama a la función para iniciar el juego cuando la página se carga completamente.
-document.addEventListener("DOMContentLoaded", generarJuego);
+    // Convertir los arrays ordenados a strings y compararlos
+    const bombasString = celdasBomba.toString();
+    const banderasString = celdasBandera.toString();
+    
+    if (bombasString === banderasString){
+        Swal.fire({
+            icon: 'success',
+            title: '¡Felicidades!',
+            text: 'Has ganado la partida. ¡Excelente trabajo!',
+            confirmButtonText: 'OK',
+            customClass: {
+                popup: 'fondo-alerta' // Agrega una clase personalizada al popup
+            }
+        }).then((result) => {
+            // Si el usuario hace clic en el botón "OK", refrescar la página
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        }); ;
+    }
+}

@@ -8,13 +8,18 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <h1 class="titulo">BUSCAMINAS</h1>
-    <nav class="botones">
-        <input type="button" value="Nivel Fácil" id="facil" class="boton">
-        <input type="button" value="Nivel Medio" id="medio" class="boton">
-        <input type="button" value="Nivel Difícil" id = "dificil" class="boton">
-    </nav>
-    <table id="tablero">
-    </table>
+    <div id="contenedor">
+        <h1 class="titulo">BUSCAMINAS</h1>
+        <nav class="botones">
+            <input type="button" value="Nivel Fácil" id="facil" class="boton">
+            <input type="button" value="Nivel Medio" id="medio" class="boton">
+            <input type="button" value="Nivel Difícil" id = "dificil" class="boton">
+        </nav>
+        <div id="contador-bombas">0</div>
+        <table id="tablero">
+        </table>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--Framework de alertas-->
+        <script src="sweetAlert.js"></script>   
+    </div>
 </body>
 </html>
