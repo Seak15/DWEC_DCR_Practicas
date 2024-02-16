@@ -1,7 +1,7 @@
 // VARIABLES GLOBALES
 let filas = 13;
 let cols = 13;
-let lado = 35; // Lado de cada casilla
+let lado = 30; // Lado de cada casilla
 let celdasBomba = []; // Almacena las celdas con bombas
 let celdasBandera = [];
 contBombas = 0;
@@ -20,6 +20,7 @@ function generarJuego() {
     document.getElementById("dificil").addEventListener("click", modoDificil);
     ponerBombas();
     generarTablero();
+    verTiempo()
 }
 
 //DIFICULTADES DEL JUEGO
@@ -81,6 +82,7 @@ function generarTablero() {
     }
 }
 
+//PONER BOMBAS
 function ponerBombas() {
     celdasBomba = [];
     let cont = 0;
@@ -98,7 +100,7 @@ function ponerBombas() {
     }
 }
 
-
+//FUNCION PARA CLICK IZQUIERDO
 function clickIzquierdo(idCelda) {
     let id = idCelda;
     let celda = document.getElementById(id);
@@ -162,13 +164,14 @@ function clickIzquierdo(idCelda) {
     ganarJuego();
 }
 
-// Función para generar un nuevo id aleatorio para la primera celda que no sea una bomba
+// FUNCION PARA GENERAR ID ALEATORIO
 function generarNuevoId() {
     let f = Math.floor(Math.random() * filas);
     let c = Math.floor(Math.random() * cols);
     return `celda-${c}-${f}`;
 }
 
+//FUNCION PARA OBTENER EL NUMERO DE BOMBAS DE LA CELDA
 function obtenerNumero(idCelda) {
     // Obtener las coordenadas de la celda a partir de su ID
     const coordenadas = idCelda.split('-');
@@ -205,6 +208,7 @@ function obtenerNumero(idCelda) {
     return numeroBombas;
 }
 
+//FUNCION PARA ABRIR EL TABLERO
 function abrirArea(c, f) {
     const coordenadas = [{ c, f }];
     let banderaElement;
@@ -273,7 +277,7 @@ function abrirArea(c, f) {
     }
 }
 
-
+//FUNCION PARA EL CLICK DERECHO
 function clickDerecho(idCelda) {
     let id = idCelda;
     let celda = document.getElementById(id);
@@ -341,12 +345,15 @@ function ganarJuego(){
     // Convertir los arrays ordenados a strings y compararlos
     const bombasString = celdasBomba.toString();
     const banderasString = celdasBandera.toString();
+
+    //Sacaremos el tiempo que ha durado la partida
+    const tiempo = document.getElementById("tiempo")
     
     if (bombasString === banderasString){
         Swal.fire({
             icon: 'success',
             title: '¡Felicidades!',
-            text: 'Has ganado la partida. ¡Excelente trabajo!',
+            text: 'Has ganado la partida. Tu tiempo ha sido: ' + tiempo.textContent,
             confirmButtonText: 'OK',
             customClass: {
                 popup: 'fondo-alerta' // Agrega una clase personalizada al popup
@@ -356,6 +363,45 @@ function ganarJuego(){
             if (result.isConfirmed) {
                 location.reload();
             }
-        }); ;
+        });
     }
 }
+
+//FUNCION PARA EL TIEMPO
+let intervaloTiempo;
+
+function verTiempo() {
+    let tiempo = document.getElementById("tiempo");
+    tiempo.innerHTML = "00:00";
+    let segundos = 0;
+    let minutos = 0;
+
+    // Función para actualizar el contador
+    function actualizarContador() {
+        segundos++;
+
+        if (segundos === 60) {
+            segundos = 0;
+            minutos++;
+        }
+
+        // Formatear los segundos y minutos con ceros a la izquierda si es necesario
+        const segundosFormateados = segundos < 10 ? "0" + segundos : segundos;
+        const minutosFormateados = minutos < 10 ? "0" + minutos : minutos;
+
+        // Actualizar el contador en el HTML con el formato 00:00
+        tiempo.innerText = `${minutosFormateados}:${segundosFormateados}`;
+    }
+
+    // Limpiar el intervalo anterior si existe
+    clearInterval(intervaloTiempo);
+
+    // Reiniciar el contador
+    segundos = 0;
+    minutos = 0;
+
+    // Crear un nuevo intervalo y guardar la referencia en la variable global
+    intervaloTiempo = setInterval(actualizarContador, 1000);
+}
+
+

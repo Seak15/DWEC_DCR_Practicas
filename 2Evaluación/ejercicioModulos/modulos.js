@@ -1,3 +1,5 @@
+
+//Oblicatorio utilizar el "./" para importar
 import { cadenaMayuscula } from "./funciones.js"; //Importamos variables desde otro archivo js
 
 const saludo = cadenaMayuscula("Hola, bienvenido")

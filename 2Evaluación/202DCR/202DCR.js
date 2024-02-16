@@ -57,7 +57,7 @@ function validarNombre() { //Validando el nombre
         return false;
     }
     else {
-        mensajeError.innerHTML = "<img src= 'images/check.png'>"
+        mensajeError.innerHTML = "✅"
         return true;
     }
 }
@@ -75,7 +75,7 @@ function validarNif() { //Validar el DNI
         mensajeError.innerHTML = "NIF incorrecto";//Muestra mensaje en tiempo real si está mal el NIF
         return false;
     } else {
-        mensajeError.innerHTML = "<img src= 'images/check.png'>";
+        mensajeError.innerHTML = "✅";
         return true;
     }
 }
@@ -90,7 +90,7 @@ function validarFecha() {
         return false;
     }
     else {
-        msgError.innerHTML = "<img src= 'images/check.png'>"
+        msgError.innerHTML = "✅"
         return true;
     }
 }
@@ -161,7 +161,7 @@ function validarColor() { //Comprobar que al menos haya un color seleccionado
         return false
     }
     else {
-        mensajeError.innerHTML = "<img src= 'images/check.png'>";
+        mensajeError.innerHTML = "✅";
         return true;
     }
 }
@@ -183,7 +183,7 @@ function validarDias() { //Comprobar que al menos haya un día seleccionado
         }
     }
     if (cont >= 2){
-        mensaje.innerHTML = "<img src= 'images/check.png'>";
+        mensaje.innerHTML = "✅";
         return true;
     }
     else{

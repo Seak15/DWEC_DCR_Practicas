@@ -43,8 +43,8 @@
        }
        let peliElegida = prompt(`Elige entre las peliculas \n ${lista}`);
 
-       while (peliElegida == null){
-        peliElegida = prompt("Introduce el nombre de una pelicula");
+       while (peliElegida == ""){
+        peliElegida = prompt("Introduce el nombre de una pelicula: \n" + lista);
        }
 
        while (comp == false){

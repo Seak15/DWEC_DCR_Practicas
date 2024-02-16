@@ -114,7 +114,18 @@ table {
     }
 }
 
-#contador-bombas {
+.contadores{
+    text-align: center;
+    justify-content: space-between;
+}
+
+.icono-cont{
+    width: 40px;
+    height: 40px; 
+    margin: 20px; 
+    vertical-align: middle; /* Alinear verticalmente al centro */
+}
+.contador {
     background-color: #000;
     color: #ff0000;
     font-family: 'Sixtyfour', sans-serif;
@@ -125,5 +136,9 @@ table {
     display: inline-block;
     width: 50px;
     text-align: center;
-    margin-left: 47%;
+}
+
+.contador-tiempo {
+    margin-left: 20px;
+    width:auto;
 }

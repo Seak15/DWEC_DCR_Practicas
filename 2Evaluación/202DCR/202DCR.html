@@ -101,6 +101,19 @@
 </style>
 </head>
 
+<!--
+Realizar una validación (débil, en el lado del cliente) utilizando indistintamente los 
+métodos vistos en clase (los tres deben estar representados) con las siguientes 
+restricciones:
+• Ningún elemento vacío
+• NIF correcto ( comprobar letra)
+• Mensaje: de entre 2 y 500 caracteres
+• Color por defecto: azul
+• Días: seleccionar al menos dos
+• Preferente: por defecto marcado el lunes
+• Botón de “Haz click sobre mí”: ir a Google.com
+-->
+
 <body>
     <fieldset class="field1">
         <form>
@@ -114,23 +127,26 @@
                 <input type="text" id="nombre" name="nombre" pattern="[A-Za-z]{2,15}" title="Introduzca su nombre"
                     required><br>
                 <section id="errorNombre"></section><br>
-
+                <!--1. Añadir un input con el NIF-->
                 <label for="nombre">NIF:</label><br>
                 <input type="text" id="nif" name="nif" pattern="[0-9]{8}[A-Z]{1}" required
                     title="Introduzca su NIF"><br>
                 <section id="errorNif"></section><br>
-
+                <!--2. Añadir un input con la fecha de matriculación (día, mes, año)-->
                 <label for="fecha">Fecha:</label><br>
                 <input type="text" id="fecha" name="fecha" pattern="\d{2}/\d{2}/\d{4}" required placeholder="DD/MM/YYYY"
                     title="Introduzca la fecha"><br>
                 <section id="errorFecha"></section><br>
 
                 <label for="msg">Mensaje</label>
+                <!--6. Añadir un contador para el campo Mensaje que indique al usuario los caracteres 
+                que le quedan antes de llegar al máximo.-->
                 <section id="contador"></section><br>
                 <textarea name="msg" id="msg" cols="80" rows="10" minlength="2" maxlength="500" required></textarea><br>
 
             </fieldset><br>
-
+            <!--3. Añadir un Select con cursos académicos (desde 20-21 a 23-24 con posibilidad de 
+            que el usuario añada nuevos cursos académicos.-->
             <label for="curso">Selecciona el curso académico:</label><br>
             <select name="curso" id="curso" required>
                 <option>19-20</option>
@@ -139,6 +155,15 @@
                 <option>22-23</option>
                 <option selected>23-24</option>
                 <option>Añadir curso</option>
+            </select><br><br>
+            <!--4. Al menos 5 “asignaturas” del DAW-->
+            <label for="asignatura">Selecciona una asignatura:</label><br>
+            <select name="asignatura" id="asignatura" required>
+                <option selected>DWEC</option>
+                <option>DWES</option>
+                <option>DAW</option>
+                <option>DIW</option>
+                <option>Inglés</option>
             </select><br><br>
 
             <label for="color">Elige un color</label><br>
@@ -156,6 +181,7 @@
             <i>Miércoles:</i><input type="checkbox" name="dia" id="miercoles"><br>
             <i>Jueves:</i><input type="checkbox" name="dia" id="jueves"><br>
             <i>Viernes:</i><input type="checkbox" name="dia" id="viernes"><br>
+            <!--5. Se debe añadir un checkbox para seleccionar/deseleccionar todos los días con disponibilidad.-->
             <i id = "msgDias">Seleccionar todo:</i><input type="checkbox" id="select"><br>
             <br>
             <section id="errorDias"></section>

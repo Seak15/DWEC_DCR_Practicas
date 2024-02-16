@@ -13,11 +13,22 @@
         <nav class="botones">
             <input type="button" value="Nivel Fácil" id="facil" class="boton">
             <input type="button" value="Nivel Medio" id="medio" class="boton">
-            <input type="button" value="Nivel Difícil" id = "dificil" class="boton">
+            <input type="button" value="Nivel Difícil" id = "dificil" class="boton"><br>
         </nav>
-        <div id="contador-bombas">0</div>
-        <table id="tablero">
-        </table>
+
+        <div class="contadores">
+            <img src="images/bomba_icono.png" class="icono-cont" alt="bomba">
+            <div id="contador-bombas" class="contador">0</div>
+            <div id = "tiempo" class = "contador contador-tiempo">00:00</div>
+            <img src="images/tiempo.png" class="icono-cont" alt="tiempo">
+        </div>
+
+        <table id="tablero"></table>
+
+        <div id = "ranking">
+
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--Framework de alertas-->
         <script src="sweetAlert.js"></script>   
     </div>
