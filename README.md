@@ -16,9 +16,4 @@ En esta carpeta se encuentra el proyecto de Buscaminas. El juego de Buscaminas e
 - **`estilos.css`**: Archivo CSS para estilizar la apariencia del juego.
 - **`index.html`**: Página HTML que contiene la interfaz de usuario del juego.
 
-## Contribución
-
-¡Siéntete libre de contribuir con correcciones, mejoras o nuevos proyectos! Simplemente realiza un fork del repositorio, realiza tus cambios y envía una pull request. Estaré encantado de revisarlas.
-
-<img align="right" alt="GIF" src="https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif" />
 
