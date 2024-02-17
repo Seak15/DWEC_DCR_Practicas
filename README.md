@@ -2,10 +2,11 @@
 
 Este repositorio contiene los siguientes proyectos:
 
-## Evaluación
+## Evaluación 1/2
 
-En esta carpeta se encuentran los archivos relacionados con los ejercicios de la evaluación. Este proyecto puede incluir diferentes tipos de archivos, como exámenes, tareas, o proyectos prácticos.
-## buscaminas
+En esta carpeta se encuentran los archivos relacionados con los ejercicios de la evaluación. Este proyecto puede incluir diferentes tipos de archivos, como exámenes, tareas, o ejercicios prácticos.
+
+## Buscaminas
 
 En esta carpeta se encuentra el proyecto de Buscaminas. El juego de Buscaminas es una recreación del popular juego de computadora donde el jugador debe despejar un campo de minas sin detonar ninguna de ellas.
 
