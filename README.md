@@ -1,4 +1,4 @@
-# Repositorio de Proyectos
+# Repositorio DWEC_DCR_PRÁCTICAS
 
 Este repositorio contiene los siguientes proyectos:
 
