@@ -19,3 +19,5 @@ En esta carpeta se encuentra el proyecto de Buscaminas. El juego de Buscaminas e
 
 ¡Siéntete libre de contribuir con correcciones, mejoras o nuevos proyectos! Simplemente realiza un fork del repositorio, realiza tus cambios y envía una pull request. Estaré encantado de revisarlas.
 
+![GitHub followers](https://img.shields.io/github/followers/tu_usuario?style=social)
+
