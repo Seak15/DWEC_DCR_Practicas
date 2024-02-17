@@ -21,5 +21,3 @@ En esta carpeta se encuentra el proyecto de Buscaminas. El juego de Buscaminas e
 
 <img align="right" alt="GIF" src="https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif" />
 
-![GitHub followers](https://img.shields.io/github/followers/DanielCuesta98?style=social)
-
